@@ -1,0 +1,9 @@
+# AestheticMiuseshare
+## Pages
+/
+/doc-cn.html
+/doc-en.html
+/doc-about-cn.html
+/doc-about-en.html
+## Tags
+AestheticMiuseshare, AestheticDirection, LiteraryAesthetic, WorldMusic, PaintingAesthetic
