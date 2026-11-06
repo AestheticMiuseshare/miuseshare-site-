@@ -1,5 +1,4 @@
-
-name = "miuseshare-site"
+name = "miuseshare"
 main = "src/index.js"
 compatibility_date = "2026-11-06"
 
