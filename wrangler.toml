@@ -1,0 +1,3 @@
+name = "museshare"
+main = "src/index.js"
+compatibility_date = "2026-11-06"
