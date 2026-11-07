@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Miuseshare | 收听与简介</title>
 <meta name="description" content="Miuseshare官方收听渠道与社交主页链接">
-<link rel="canonical" href="https://miuseshare.miuseshare.workers.dev/links.html">
-<link rel="stylesheet" href="../../style.css">
+<link rel="canonical" href="https://aestheticmiuseshare.github.io/miuseshare-site-/pages/catalog.html">
+<!-- 重要！pages文件夹向上一层找style.css，只写一个点 -->
+<link rel="stylesheet" href="../style.css">
 <style>
 .tag-group{margin:0.6rem 0 1.2rem}
 .tag-item{display:inline-block;border:1px solid #777;border-radius:999px;padding:.22rem .6rem;margin:.2rem .15rem;color:#222;font-size:.8rem}
@@ -36,7 +37,6 @@
 <h1 class="site-title">密友</h1>
 <p class="site-subtitle">收听与简介 · Listen & Profiles</p>
 <div class="divider"></div>
-
 <div class="tag-group">
   <span class="tag-item">世界音乐</span>
   <span class="tag-item">低保真</span>
@@ -46,7 +46,6 @@
   <span class="tag-item">嘻哈</span>
   <span class="tag-item">周围的</span>
 </div>
-
 <ul class="link-list">
   <li class="link-item">
     <a class="link-row" href="https://open.spotify.com/artist/7vwb1kB95fV6RSojuJN516" target="_blank" rel="noopener noreferrer">
@@ -103,27 +102,30 @@
     </a>
   </li>
   <li class="link-item">
-    <a class="link-row" href="catalog.html">
+    <a class="link-row" href="songscatalog.txt" target="_blank" rel="noopener noreferrer">
       <span class="link-name">📜 曲目清单 / 音乐目录</span>
       <span class="link-arrow">→</span>
     </a>
   </li>
 </ul>
 
-<a class="card" href="../index.html">
-  <div class="card-text">
-    <span class="card-main">返回首页</span>
-    <span class="card-sub">Back to Home</span>
-  </div>
-  <span class="card-arrow">→</span>
-</a>
+<!-- 返回首页，完整card-list卡片容器，和首页一模一样 -->
+<div class="card-list">
+  <a class="card" href="../index.html">
+    <div class="card-text">
+      <span class="card-main">返回首页</span>
+      <span class="card-sub">Back to Home</span>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+</div>
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "MusicGroup",
   "name": "Miuseshare",
-  "url": "https://miuseshare.miuseshare.workers.dev/",
+  "url": "https://aestheticmiuseshare.github.io/miuseshare-site-/pages/catalog.html",
   "genre": ["World Music","Lo‑Fi","Pop","Jazz","Soul","Hip‑Hop","Ambient"],
   "sameAs": [
     "https://open.spotify.com/artist/7vwb1kB95fV6RSojuJN516",
