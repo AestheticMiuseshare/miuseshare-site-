@@ -7,5 +7,6 @@
 /pages/doc/doc-en.html
 /pages/doc/doc-about-cn.html
 /pages/doc/doc-about-en.html
+/pages/doc/doc-map.html
 ## Tags
 AestheticMiuseshare, AestheticDirection, LiteraryAesthetic, WorldMusic, PaintingAesthetic
