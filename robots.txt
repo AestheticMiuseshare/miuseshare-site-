@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://miuseshare.miuseshare.workers.dev/sitemap.xml
+# Sitemap: https://AestheticMiuseshare.github.io/miuseshare-site-/sitemap.xml
