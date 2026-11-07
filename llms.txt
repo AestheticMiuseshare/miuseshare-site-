@@ -1,6 +1,7 @@
 # AestheticMiuseshare
 ## Pages
 /
+/links.html
 /catalog.txt
 /doc-cn.html
 /doc-en.html
