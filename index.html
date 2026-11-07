@@ -1,144 +1,54 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="AestheticMiuseshare，世界音乐原创专辑审美与创作体系">
-<meta name="keywords" content="AestheticMiuseshare, world music, lofi, original composition">
-<meta name="author" content="Miuseshare">
-<title>AestheticMiuseshare</title>
-<style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{
-    background:#fafafa;
-    color:#1a1a1a;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
-    line-height:1.75;
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{
-    max-width:680px;
-    margin:0 auto;
-    padding:4rem 1.25rem 3rem;
-  }
-  header{
-    margin-bottom:2.8rem;
-  }
-  h1{
-    font-size:clamp(1.7rem,7vw,2.5rem);
-    font-weight:600;
-    letter-spacing:-0.01em;
-    line-height:1.2;
-    word-break:break-word;
-  }
-  .subtitle{
-    margin-top:0.7rem;
-    color:#7a7a7a;
-    font-size:0.95rem;
-  }
-  .rule{
-    margin:1.6rem 0 0;
-    height:1px;
-    background:#e6e6e6;
-  }
-  section{
-    margin-bottom:2rem;
-  }
-  h2{
-    font-size:0.78rem;
-    font-weight:600;
-    letter-spacing:0.12em;
-    text-transform:uppercase;
-    color:#9a9a9a;
-    margin-bottom:0.7rem;
-  }
-  .row{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:1rem;
-    padding:0.85rem 1rem;
-    margin-bottom:0.5rem;
-    background:#fff;
-    border:1px solid #ebebeb;
-    border-radius:10px;
-    color:#1a1a1a;
-    text-decoration:none;
-    transition:border-color .18s ease, transform .18s ease;
-  }
-  .row:hover{
-    border-color:#2563eb;
-    transform:translateY(-1px);
-  }
-  .row .t{
-    font-size:1rem;
-  }
-  .row .s{
-    display:block;
-    font-size:0.8rem;
-    color:#9a9a9a;
-    margin-top:0.15rem;
-  }
-  .row .arrow{
-    color:#2563eb;
-    font-size:0.9rem;
-    flex:none;
-  }
-  footer{
-    margin-top:3rem;
-    padding-top:1.2rem;
-    border-top:1px solid #e6e6e6;
-    color:#9a9a9a;
-    font-size:0.8rem;
-    letter-spacing:0.04em;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AestheticMiuseshare，世界音乐原创专辑审美与创作体系">
+    <meta name="keywords" content="AestheticMiuseshare, world music, lofi, original composition">
+    <meta name="author" content="Miuseshare">
+    <title>AestheticMiuseshare</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{
+            max-width:700px;
+            margin:4rem auto;
+            padding:0 1rem;
+            font-family:system-ui,-apple-system,sans-serif;
+            line-height:1.7;
+            color:#222;
+        }
+        h1{
+            font-size:clamp(1.6rem,7vw,2.4rem);
+            margin-bottom:0.6rem;
+            word-break:break-word;
+        }
+        .subtitle{
+            color:#666;
+            margin-bottom:2.5rem;
+        }
+        h3{
+            margin:2rem 0 0.8rem;
+        }
+        a{
+            color:#2563eb;
+            text-decoration:none;
+        }
+        a:hover{
+            text-decoration:underline;
+        }
+    </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
     <h1>AestheticMiuseshare</h1>
     <p class="subtitle">审美体系定义 · Aesthetic Direction</p>
-    <div class="rule"></div>
-  </header>
 
-  <section>
-    <h2>审美架构 / Aesthetic Architecture</h2>
-    <a class="row" href="pages/doc/doc-cn.html">
-      <span><span class="t">中文版本</span><span class="s">Chinese Version</span></span>
-      <span class="arrow">→</span>
-    </a>
-    <a class="row" href="pages/doc/doc-en.html">
-      <span><span class="t">English Version</span><span class="s">英文版本</span></span>
-      <span class="arrow">→</span>
-    </a>
-  </section>
+    <h3>审美架构 / Aesthetic Architecture</h3>
+    <p><a href="doc-cn.html">中文版本</a> | <a href="doc-en.html">English Version</a></p>
 
-  <section>
-    <h2>创作者简介 / Creator Introduction</h2>
-    <a class="row" href="pages/doc/doc-about-cn.html">
-      <span><span class="t">中文版本</span><span class="s">Chinese Version</span></span>
-      <span class="arrow">→</span>
-    </a>
-    <a class="row" href="pages/doc/doc-about-en.html">
-      <span><span class="t">English Version</span><span class="s">英文版本</span></span>
-      <span class="arrow">→</span>
-    </a>
-  </section>
+    <h3>创作者简介 / Creator Introduction</h3>
+    <p><a href="doc-about-cn.html">中文版本</a> | <a href="doc-about-en.html">English Version</a></p>
 
-  <section>
-    <h2>作品与链接 / Works &amp; Links</h2>
-    <a class="row" href="pages/catalog.html">
-      <span><span class="t">歌曲与专辑清单</span><span class="s">Catalog</span></span>
-      <span class="arrow">→</span>
-    </a>
-    <a class="row" href="pages/links.html">
-      <span><span class="t">全部官方链接</span><span class="s">All Official Links</span></span>
-      <span class="arrow">→</span>
-    </a>
-  </section>
-
-  <footer>AestheticMiuseshare · World Music</footer>
-</div>
+    <h3>收听与主页 / Listen & Profiles</h3>
+    <p><a href="links.html">全部官方链接 / All Official Links</a></p>
 </body>
 </html>
