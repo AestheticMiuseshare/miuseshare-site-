@@ -1,35 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://miuseshare.miuseshare.workers.dev</loc>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://miuseshare.miuseshare.workers.dev/doc-cn.html</loc>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://miuseshare.miuseshare.workers.dev/doc-en.html</loc>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://miuseshare.miuseshare.workers.dev/doc-about-cn.html</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://miuseshare.miuseshare.workers.dev/doc-about-en.html</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://miuseshare.miuseshare.workers.dev/llms.txt</loc>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://miuseshare.miuseshare.workers.dev/links.html</loc>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://miuseshare.miuseshare.workers.dev/catalog.txt</loc>
-    <priority>0.85</priority>
-  </url>
+<url>
+<loc>https://miuseshare.miuseshare.workers.dev/</loc>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+<url>
+<loc>https://miuseshare.miuseshare.workers.dev/pages/links.html</loc>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://miuseshare.miuseshare.workers.dev/pages/catalog.html</loc>
+<changefreq>weekly</changefreq>
+<priority>0.85</priority>
+</url>
+<url>
+<loc>https://miuseshare.miuseshare.workers.dev/pages/docs/doc-cn.html</loc>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://miuseshare.miuseshare.workers.dev/pages/docs/doc-en.html</loc>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://miuseshare.miuseshare.workers.dev/pages/docs/doc-about-cn.html</loc>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://miuseshare.miuseshare.workers.dev/pages/docs/doc-about-en.html</loc>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
 </urlset>
