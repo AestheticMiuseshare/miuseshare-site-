@@ -1,84 +1,141 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Miuseshare | 收听与简介</title>
-<meta name="description" content="Miuseshare官方收听渠道与社交主页链接">
-<link rel="stylesheet" href="../../style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Miuseshare | Listen & Profiles</title>
+<meta name="description" content="Official links for Miuseshare — listen on Spotify, Apple Music, YouTube, Amazon Music, SoundCloud, Huawei Music, and follow across social platforms.">
+<link rel="canonical" href="https://miuseshare.miuseshare.workers.dev/links.html">
 <style>
-.tag-group{
-  margin:1rem 0 2rem;
-}
-.tag-item{
-  display:inline-block;
-  border:1px solid #777;
-  border-radius:999px;
-  padding:0.35rem 0.9rem;
-  margin:0.3rem 0.25rem;
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  max-width:680px;
+  margin:2.6rem auto;
+  padding:0 1rem 2.6rem;
+  background:#fafafa;
   color:#222;
+  font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  line-height:1.7;
+  word-break:break-word;
 }
-ul{
-  padding-left:1.4rem;
-  line-height:2.1;
-  font-size:1.05rem;
+h1{font-size:1.6rem;font-weight:600;line-height:1.25;margin-bottom:.35rem}
+.subtitle{color:#777;font-size:.88rem;margin-bottom:1rem}
+.divider{height:1px;background:#e2e2e2;margin-bottom:1.2rem}
+.tag-group{margin:.6rem 0 1.3rem}
+.tag{
+  display:inline-block;
+  border:1px solid #ccc;
+  border-radius:999px;
+  padding:.14rem .5rem;
+  margin:.18rem .12rem;
+  color:#444;
+  font-size:.70rem;
+  line-height:1.5;
 }
+.link-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding:.36rem .95rem;
+  margin-bottom:.35rem;
+  border:1px solid #ccc;
+  border-radius:12px;
+  background:#fff;
+  color:#222;
+  text-decoration:none;
+  transition:border-color .18s ease,background .18s ease;
+}
+.link-row:hover,.link-row:active{border-color:#222;background:#f8f8f6}
+.link-name{display:block;font-size:.90rem;line-height:1.45}
+.link-note{display:block;font-size:.72rem;color:#888;line-height:1.35}
+.link-arrow{color:#aaa;font-size:.95rem;flex:none}
+.link-row:hover .link-arrow{color:#222}
+.card{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding:.7rem 1rem;
+  margin-top:1.6rem;
+  border:1px solid #ccc;
+  border-radius:12px;
+  background:#fff;
+  color:#222;
+  text-decoration:none;
+  transition:border-color .18s ease,background .18s ease;
+}
+.card:hover,.card:active{border-color:#222;background:#f8f8f6}
+.card-main{display:block;font-size:.92rem}
+.card-sub{display:block;font-size:.74rem;color:#888}
+.card-arrow{color:#aaa;font-size:1rem;flex:none}
+.card:hover .card-arrow{color:#222}
 </style>
 </head>
 <body>
-<h1 class="site-title">密友</h1>
-<p class="site-subtitle">收听与简介 · Listen & Profiles</p>
+<h1>Miuseshare</h1>
+<p class="subtitle">Listen &amp; Profiles · 收听与主页</p>
 <div class="divider"></div>
-
-<div class="tag-group">
-  <span class="tag-item">世界音乐</span>
-  <span class="tag-item">低保真</span>
-  <span class="tag-item">流行音乐</span>
-  <span class="tag-item">爵士乐</span>
-  <span class="tag-item">灵魂</span>
-  <span class="tag-item">嘻哈</span>
-  <span class="tag-item">周围的</span>
+<div class="tag-group" aria-label="Music genres">
+  <span class="tag">World Music</span>
+  <span class="tag">Lo‑Fi</span>
+  <span class="tag">Pop</span>
+  <span class="tag">Jazz</span>
+  <span class="tag">Soul</span>
+  <span class="tag">Hip‑Hop</span>
+  <span class="tag">Ambient</span>
 </div>
-
-<ul>
-  <li><a href="https://open.spotify.com/artist/7vwb1kB95fV6RSojuJN516" target="_blank" rel="noopener noreferrer">Spotify</a></li>
-  <li><a href="https://youtube.com/channel/UC7-dcWv8guFznVXXn-ao3xw" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-  <li><a href="https://music.apple.com/cn/artist/miuseshare/1896474705" target="_blank" rel="noopener noreferrer">Apple Music</a></li>
-  <li><a href="https://music.amazon.com/artists/B0GX6T9FCY/miuseshare?marketplaceId=ATVPDKIKX0DER&musicTerritory=US&ref=dm_sh_r5osHTDjcuwoHwrpipjo5aVDh" target="_blank" rel="noopener noreferrer">亚马逊音乐</a></li>
-  <li><a href="https://on.soundcloud.com/i8S7mP7Zw6oxQs3vo6" target="_blank" rel="noopener noreferrer">SoundCloud</a></li>
-  <li><a href="https://url.cloud.huawei.com/CFQSfIHxLi" target="_blank" rel="noopener noreferrer">华为音乐</a></li>
-  <li><a href="https://www.facebook.com/share/1K5rAQRpeL/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-  <li><a href="https://pin.it/5AInrhm2f" target="_blank" rel="noopener noreferrer">Pinterest</a></li>
-  <li><a href="https://www.tumblr.com/miuseshare" target="_blank" rel="noopener noreferrer">Tumblr</a></li>
-</ul>
-
-<br>
-<p><a href="catalog.html">📜 曲目清单 / 音乐目录</a></p>
-
-<br>
-<a class="card" href="../../index.html">
-  <div class="card-text">
-    <span class="card-main">返回首页</span>
-    <span class="card-sub">Back to Home</span>
-  </div>
+<a class="link-row" href="https://open.spotify.com/artist/7vwb1kB95fV6RSojuJN516" target="_blank" rel="noopener noreferrer">
+  <span><span class="link-name">Spotify</span><span class="link-note">Stream tracks</span></span>
+  <span class="link-arrow">→</span>
+</a>
+<a class="link-row" href="https://youtube.com/channel/UC7-dcWv8guFznVXXn-ao3xw" target="_blank" rel="noopener noreferrer">
+  <span><span class="link-name">YouTube</span><span class="link-note">Video channel</span></span>
+  <span class="link-arrow">→</span>
+</a>
+<a class="link-row" href="https://music.apple.com/cn/artist/miuseshare/1896474705" target="_blank" rel="noopener noreferrer">
+  <span><span class="link-name">Apple Music</span><span class="link-note">Apple streaming</span></span>
+  <span class="link-arrow">→</span>
+</a>
+<a class="link-row" href="https://music.amazon.com/artists/B0GX6T9FCY/miuseshare?marketplaceId=ATVPDKIKX0DER&musicTerritory=US&ref=dm_sh_r5osHTDjcuwoHwrpipjo5aVDh" target="_blank" rel="noopener noreferrer">
+  <span><span class="link-name">Amazon Music</span><span class="link-note">Amazon streaming</span></span>
+  <span class="link-arrow">→</span>
+</a>
+<a class="link-row" href="https://on.soundcloud.com/i8S7mP7Zw6oxQs3vo6" target="_blank" rel="noopener noreferrer">
+  <span><span class="link-name">SoundCloud</span><span class="link-note">Demos &amp; tracks</span></span>
+  <span class="link-arrow">→</span>
+</a>
+<a class="link-row" href="https://url.cloud.huawei.com/CFQSfIHxLi" target="_blank" rel="noopener noreferrer">
+  <span><span class="link-name">Huawei Music</span><span class="link-note">Domestic streaming</span></span>
+  <span class="link-arrow">→</span>
+</a>
+<a class="link-row" href="https://www.facebook.com/share/1K5rAQRpeL/" target="_blank" rel="noopener noreferrer">
+  <span><span class="link-name">Facebook</span><span class="link-note">Social profile</span></span>
+  <span class="link-arrow">→</span>
+</a>
+<a class="link-row" href="https://pin.it/5AInrhm2f" target="_blank" rel="noopener noreferrer">
+  <span><span class="link-name">Pinterest</span><span class="link-note">Visual gallery</span></span>
+  <span class="link-arrow">→</span>
+</a>
+<a class="link-row" href="https://www.tumblr.com/miuseshare" target="_blank" rel="noopener noreferrer">
+  <span><span class="link-name">Tumblr</span><span class="link-note">Aesthetic feed</span></span>
+  <span class="link-arrow">→</span>
+</a>
+<a class="link-row" href="catalog.html">
+  <span><span class="link-name">📜 曲目清单</span><span class="link-note">Music Catalog</span></span>
+  <span class="link-arrow">→</span>
+</a>
+<a class="card" href="../index.html" rel="home">
+  <span><span class="card-main">← 返回首页</span><span class="card-sub">Back to Home</span></span>
   <span class="card-arrow">→</span>
 </a>
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "MusicGroup",
   "name": "Miuseshare",
   "url": "https://miuseshare.miuseshare.workers.dev/",
-  "genre": [
-    "World Music",
-    "Lo‑Fi",
-    "Pop",
-    "Jazz",
-    "Soul",
-    "Hip‑Hop",
-    "Ambient"
-  ],
+  "genre": ["World Music","Lo‑Fi","Pop","Jazz","Soul","Hip‑Hop","Ambient"],
   "sameAs": [
     "https://open.spotify.com/artist/7vwb1kB95fV6RSojuJN516",
     "https://youtube.com/channel/UC7-dcWv8guFznVXXn-ao3xw",
