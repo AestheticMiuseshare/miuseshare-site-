@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Miuseshare | 曲目清单</title>
+<meta name="description" content="Miuseshare完整曲目清单">
+<link rel="stylesheet" href="../style.css">
+<style>
+.track-block{
+  margin-bottom:1.6rem;
+  padding:1rem;
+  border:1px solid #ddd;
+  border-radius:12px;
+}
+.group-title{
+  font-size:1.2rem;
+  font-weight:bold;
+  margin:2rem 0 0.8rem;
+  color:#222;
+}
+.track-name{
+  font-size:1rem;
+  font-weight:bold;
+}
+.track-meta{
+  font-size:0.88rem;
+  color:#555;
+  margin:0.4rem 0 0.8rem;
+}
+.play-btn{
+  display:inline-block;
+  padding:0.4rem 0.8rem;
+  background:#f4f4f4;
+  border:1px solid #ccc;
+  border-radius:8px;
+  text-decoration:none;
+  color:#222;
+  font-size:0.85rem;
+}
+.play-btn:active{
+  background:#e9e9e9;
+}
+.tag-group{
+  margin-top:0.8rem;
+}
+.tag-item{
+  display:inline-block;border:1px solid #777;border-radius:999px;padding:.22rem .6rem;margin:.2rem .15rem;color:#222;font-size:.8rem;
+}
+</style>
+</head>
+<body>
+<h1 class="site-title">曲目清单</h1>
+<p class="site-subtitle">Song Catalog</p>
+<div class="divider"></div>
+
+<div id="wrap"></div>
+
+<div class="card-list">
+  <a class="card" href="catalog.html">
+    <div class="card-text">
+      <span class="card-main">返回收听页面</span>
+      <span class="card-sub">Back</span>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+</div>
+
+<script>
+const wrap = document.querySelector('#wrap');
+
+//模拟测试文本，预览排版，暂时不读取txt
+const mockText = `# 单曲的
+1. Shackles | 艺术家:Miuseshare | 世界音乐, 说唱
+https://song.link/example-01
+#AestheticMiuseshare,#审美方向,#世界音乐,#绘画美学
+
+# 演示专辑
+2. Demo Song | 艺术家:Miuseshare | 流行,低保真
+https://song.link/example-02
+#AestheticMiuseshare,#低保真,#流行
+`;
+
+function renderBlock(lines){
+  let group = '';
+  let info = '';
+  let link = '';
+  let tagStr = '';
+
+  for(let l of lines){
+    const t = l.trim();
+    if(l.startsWith('# ') && !l.startsWith('#Aesthetic')){
+      group = t.replace('# ','');
+    }else if(t.startsWith('http')){
+      link = t;
+    }else if(t.startsWith('#Aesthetic')){
+      tagStr = t;
+    }else{
+      info = t;
+    }
+  }
+
+  let namePart = info;
+  let artist = '';
+  let genre = '';
+  const sp = info.split(' | ');
+  if(sp.length >= 3){
+    namePart = sp[0];
+    artist = sp[1];
+    genre = sp.slice(2).join(' ');
+  }
+
+  let tagHtml = '';
+  if(tagStr){
+    const tags = tagStr.split(',');
+    for(const t of tags){
+      tagHtml += `<span class="tag-item">${t.replace('#','')}</span>`;
+    }
+  }
+
+  const groupHtml = group ? `<div class="group-title">${group}</div>` : '';
+  const linkHtml = link
+    ? `<a class="play-btn" href="${link}" target="_blank" rel="noopener noreferrer">打开播放链接</a>`
+    : '';
+
+  return `
+${groupHtml}
+<div class="track-block">
+  <div class="track-name">${namePart}</div>
+  <div class="track-meta">${artist} &nbsp;｜&nbsp; ${genre}</div>
+  ${linkHtml}
+  <div class="tag-group">${tagHtml}</div>
+</div>
+`;
+}
+
+function renderAll(text){
+  const lines = text.split('\n');
+  let html = '';
+  let blockLines = [];
+  for(const line of lines){
+    const t = line.trim();
+    if(t === ''){
+      if(blockLines.length > 0){
+        html += renderBlock(blockLines);
+        blockLines = [];
+      }
+      continue;
+    }
+    blockLines.push(t);
+  }
+  if(blockLines.length>0){
+    html += renderBlock(blockLines);
+  }
+  wrap.innerHTML = html;
+}
+
+renderAll(mockText);
+</script>
+</body>
+</html>
