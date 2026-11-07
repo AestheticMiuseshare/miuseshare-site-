@@ -2,6 +2,7 @@
 ## Pages
 /
 /pages/links.html
+/pages/songscatalog.txt
 /pages/doc/doc-cn.html
 /pages/doc/doc-en.html
 /pages/doc/doc-about-cn.html
