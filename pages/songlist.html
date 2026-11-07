@@ -13,11 +13,21 @@
   border:1px solid #ddd;
   border-radius:12px;
 }
-.group-title{
+/* 单曲分组标题 */
+.group-title-single{
   font-size:1.2rem;
   font-weight:bold;
   margin:2rem 0 0.8rem;
   color:#222;
+}
+/* 专辑分组标题，和单曲做一点区分 */
+.group-title-album{
+  font-size:1.3rem;
+  font-weight:bold;
+  margin:2.2rem 0 1rem;
+  color:#1a1a1a;
+  border-bottom:1px solid #cccccc;
+  padding-bottom:0.4rem;
 }
 .track-name{
   font-size:1rem;
@@ -56,6 +66,7 @@
 
 <div id="wrap"></div>
 
+<!-- 返回：使用card卡片组件，保持全站统一风格 -->
 <div class="card-list">
   <a class="card" href="catalog.html">
     <div class="card-text">
@@ -69,32 +80,40 @@
 <script>
 const wrap = document.querySelector('#wrap');
 
-//模拟测试文本，预览排版，暂时不读取txt
-const mockText = `# 单曲的
-1. Shackles | 艺术家:Miuseshare | 世界音乐, 说唱
-https://song.link/example-01
-#AestheticMiuseshare,#审美方向,#世界音乐,#绘画美学
+// 测试模拟数据，格式和txt完全一致
+const mockText = `# Single
+1. Shackles | Artist:Miuseshare | world music, rap
+https://song.link/s/0zRsSSJjkyZILkWoRnFoXs
+#AestheticMiuseshare,#AestheticDirection,#LiteraryAesthetic,#WorldMusic,#PaintingAesthetic
+#AestheticMiuseshare,#审美方向,#文学审美,#世界音乐,#绘画审美
 
-# 演示专辑
-2. Demo Song | 艺术家:Miuseshare | 流行,低保真
-https://song.link/example-02
-#AestheticMiuseshare,#低保真,#流行
+# Single
+2. Fragrant Shoulder Beauty | Artist:Miuseshare | world music, lofi
+https://song.link/s/6B044eLbIiTFBI5wdQqDGI
+#AestheticMiuseshare,#AestheticDirection,#LiteraryAesthetic,#WorldMusic,#PaintingAesthetic
+#AestheticMiuseshare,#审美方向,#文学审美,#世界音乐,#绘画审美
+
+# Single
+3. Wind in Your Ear | Artist:Miuseshare | world music, pop
+https://song.link/y/mEC4X383oyQ
+#AestheticMiuseshare,#AestheticDirection,#LiteraryAesthetic,#WorldMusic,#PaintingAesthetic
+#AestheticMiuseshare,#审美方向,#文学审美,#世界音乐,#绘画审美
 `;
 
 function renderBlock(lines){
-  let group = '';
+  let groupRaw = '';
   let info = '';
   let link = '';
-  let tagStr = '';
+  let tagLines = [];
 
   for(let l of lines){
     const t = l.trim();
     if(l.startsWith('# ') && !l.startsWith('#Aesthetic')){
-      group = t.replace('# ','');
+      groupRaw = t.replace('# ','');
     }else if(t.startsWith('http')){
       link = t;
     }else if(t.startsWith('#Aesthetic')){
-      tagStr = t;
+      tagLines.push(t);
     }else{
       info = t;
     }
@@ -104,21 +123,34 @@ function renderBlock(lines){
   let artist = '';
   let genre = '';
   const sp = info.split(' | ');
-  if(sp.length >= 3){
+  if(sp.length >=3){
     namePart = sp[0];
     artist = sp[1];
     genre = sp.slice(2).join(' ');
   }
 
+  let allTags = [];
+  for(let tagLine of tagLines){
+    const arr = tagLine.split(',');
+    for(let s of arr){
+      allTags.push(s.replace('#',''));
+    }
+  }
+  allTags = [...new Set(allTags)];
   let tagHtml = '';
-  if(tagStr){
-    const tags = tagStr.split(',');
-    for(const t of tags){
-      tagHtml += `<span class="tag-item">${t.replace('#','')}</span>`;
+  for(let t of allTags){
+    tagHtml += `<span class="tag-item">${t}</span>`;
+  }
+
+  let groupHtml = '';
+  if(groupRaw){
+    if(groupRaw.trim() === 'Single'){
+      groupHtml = `<div class="group-title-single">Single 单曲</div>`;
+    }else{
+      groupHtml = `<div class="group-title-album">${groupRaw}</div>`;
     }
   }
 
-  const groupHtml = group ? `<div class="group-title">${group}</div>` : '';
   const linkHtml = link
     ? `<a class="play-btn" href="${link}" target="_blank" rel="noopener noreferrer">打开播放链接</a>`
     : '';
