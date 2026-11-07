@@ -1,11 +1,11 @@
 # AestheticMiuseshare
 ## Pages
 /
-/links.html
+/pages/links.html
 /catalog.txt
-/doc-cn.html
-/doc-en.html
-/doc-about-cn.html
-/doc-about-en.html
+/pages/docs/doc-cn.html
+/pages/docs/doc-en.html
+/pages/docs/doc-about-cn.html
+/pages/docs/doc-about-en.html
 ## Tags
 AestheticMiuseshare, AestheticDirection, LiteraryAesthetic, WorldMusic, PaintingAesthetic
