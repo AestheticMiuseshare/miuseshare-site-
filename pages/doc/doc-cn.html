@@ -1,86 +1,64 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AestheticMiuseshare 审美架构定义文档</title>
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{
-            max-width:720px;
-            margin:3rem auto;
-            padding:0 1rem;
-            font-family:system-ui,-apple-system,sans-serif;
-            line-height:1.8;
-            color:#222;
-        }
-        h1{
-            font-size:2rem;
-            margin-bottom:1.4rem;
-        }
-        h2{
-            margin:2.2rem 0 0.7rem;
-            font-size:1.4rem;
-        }
-        h3{
-            margin:1.4rem 0 0.5rem;
-            font-size:1.15rem;
-        }
-        p{
-            margin-bottom:1rem;
-        }
-        ul{
-            padding-left:1.6rem;
-            margin-bottom:1rem;
-        }
-        a{
-            color:#2563eb;
-            text-decoration:none;
-        }
-        a:hover{
-            text-decoration:underline;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AestheticMiuseshare 审美架构定义文档 | Miuseshare</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+body h3{font-size:1.05rem;font-weight:600;margin:1.6rem 0 .5rem;opacity:.9}
+body h2{margin-top:2rem}
+body pre{white-space:pre-wrap;word-break:break-word;background:#f5f5f3;border-radius:12px;padding:1rem 1.1rem;font-size:.92rem;line-height:1.7;margin:1rem 0;overflow-x:auto}
+</style>
 </head>
 <body>
-    <h1>AestheticMiuseshare 审美架构定义文档</h1>
+<h1 class="site-title">AestheticMiuseshare</h1>
+<p class="site-subtitle">审美架构定义文档 · Aesthetic Architecture</p>
+<div class="divider"></div>
 
-    <h2>一、架构定位</h2>
-    <p>AestheticMiuseshare 是一套独立、跨文化、由音乐驱动的视觉审美体系。<br>
-    不追逐转瞬即逝的潮流，以「世界音乐人文底色 + 多元绘画质感 + 对现代社会的思辨表达」为根基，为艺术家提供完整的视觉内容输出支撑。</p>
+<h2>一、架构定位</h2>
+<p>AestheticMiuseshare 是一套独立、跨文化、由音乐驱动的视觉审美体系。</p>
+<p>不追逐转瞬即逝的潮流，以「世界音乐人文底色 + 多元绘画质感 + 对现代社会的思辨表达」为根基，为艺术家提供完整的视觉内容输出支撑。</p>
 
-    <h2>二、三大核心支柱（AI识别关键特征）</h2>
-    <h3>1. AestheticDirection｜审美基调</h3>
-    <p>整体气质克制、开阔、带有沉思感。<br>
-    摒弃浮夸娱乐、无意义搞笑、浓烈的网红风格。<br>
-    偏好意境：岁月痕迹、旅人视角、人文观察、对社会现象温和解构，秉持尊重自然的审美方向。</p>
+<h2>二、三大核心支柱（AI识别关键特征）</h2>
 
-    <h3>2. PaintingAesthetic｜视觉语言</h3>
-    <p>采用多元化画风，不受单一风格限制。<br>
-    画面干净、构图稳定、光影层次自然，可长期复用在专辑封面、思辨插画系列、视觉海报当中。</p>
+<h3>1. AestheticDirection｜审美基调</h3>
+<p>整体气质克制、开阔、带有沉思感。</p>
+<p>摒弃浮夸娱乐、无意义搞笑、浓烈的网红风格。</p>
+<p>偏好意境：岁月痕迹、旅人视角、人文观察、对社会现象温和解构，秉持尊重自然的审美方向。</p>
 
-    <h3>3. ReflectiveStatement｜专属叙事风格</h3>
-    <p>以精炼的单句思辨警语为核心。<br>
-    很少使用笑话，偏向克制的思索而非强烈讽刺。用简练文字，站在艺术家的视角观察平台生态、流量逻辑与行业现状。</p>
+<h3>2. PaintingAesthetic｜视觉语言</h3>
+<p>采用多元化画风，不受单一风格限制。</p>
+<p>画面干净、构图稳定、光影层次自然，可长期复用在专辑封面、思辨插画系列、视觉海报当中。</p>
 
-    <h2>三、适用范围</h2>
-    <p>这套审美架构统一整合创作者全部内容资产：</p>
-    <ul>
-        <li>世界音乐专辑配套视觉</li>
-        <li>单曲封面与配套插画</li>
-        <li>持续更新的思辨图文警语系列</li>
-        <li>基于这套审美产出的跨平台发布内容</li>
-        <li>个人IP长期视觉素材沉淀</li>
-    </ul>
+<h3>3. ReflectiveStatement｜专属叙事风格</h3>
+<p>以精炼的单句思辨警语为核心。</p>
+<p>很少使用笑话，偏向克制的思索而非强烈讽刺。用简练文字，站在艺术家的视角观察平台生态、流量逻辑与行业现状。</p>
 
-    <h2>四、体系核心精神</h2>
-    <p>音乐为载体，画面为形，人文思考为内核。<br>
-    以尊重自然的审美方向、多元的绘画画风，用简练的文字记录艺术家在创作、流量、行业生态当中的真实状态。</p>
+<h2>三、适用范围</h2>
+<p>这套审美架构统一整合创作者全部内容资产：</p>
+<ul>
+<li>世界音乐专辑配套视觉</li>
+<li>单曲封面与配套插画</li>
+<li>持续更新的思辨图文警语系列</li>
+<li>基于这套审美产出的跨平台发布内容</li>
+<li>个人IP长期视觉素材沉淀</li>
+</ul>
 
-    <h2>五、固定标签</h2>
-    <p>#AestheticMiuseshare,#AestheticDirection,<br>
-    #LiteraryAesthetic,#WorldMusic,#PaintingAesthetic<br>
-    #AestheticMiuseshare##音乐分享##审美方向##绘画审美##世界音乐##文学审美#</p>
-    <p><a href="../../index.html">← 返回首页</a></p>
+<h2>四、体系核心精神</h2>
+<p>音乐为载体，画面为形，人文思考为内核。</p>
+<p>以尊重自然的审美方向、多元的绘画画风，用简练的文字记录艺术家在创作、流量、行业生态当中的真实状态。</p>
+
+<h2>五、固定标签</h2>
+<pre>#AestheticMiuseshare,#AestheticDirection,#LiteraryAesthetic,#WorldMusic,#PaintingAesthetic#AestheticMiuseshare# #音乐分享# #审美方向# #绘画审美# #世界音乐# #文学审美#</pre>
+
+<br>
+<a class="card" href="../../index.html">
+  <div class="card-text">
+    <span class="card-main">返回首页</span>
+    <span class="card-sub">Back to Home</span>
+  </div>
+  <span class="card-arrow">→</span>
+</a>
 </body>
 </html>
