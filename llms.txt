@@ -3,9 +3,9 @@
 /
 /pages/links.html
 /catalog.txt
-/pages/docs/doc-cn.html
-/pages/docs/doc-en.html
-/pages/docs/doc-about-cn.html
-/pages/docs/doc-about-en.html
+/pages/doc/doc-cn.html
+/pages/doc/doc-en.html
+/pages/doc/doc-about-cn.html
+/pages/doc/doc-about-en.html
 ## Tags
 AestheticMiuseshare, AestheticDirection, LiteraryAesthetic, WorldMusic, PaintingAesthetic
