@@ -6,7 +6,5 @@
 /doc-en.html
 /doc-about-cn.html
 /doc-about-en.html
-## Music Catalog
-https://miuseshare.miuseshare.workers.dev/catalog.txt
 ## Tags
 AestheticMiuseshare, AestheticDirection, LiteraryAesthetic, WorldMusic, PaintingAesthetic
