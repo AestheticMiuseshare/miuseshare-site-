@@ -13,14 +13,12 @@
   border:1px solid #ddd;
   border-radius:12px;
 }
-/* 单曲分组标题 */
 .group-title-single{
   font-size:1.2rem;
   font-weight:bold;
   margin:2rem 0 0.8rem;
   color:#222;
 }
-/* 专辑分组标题，和单曲做一点区分 */
 .group-title-album{
   font-size:1.3rem;
   font-weight:bold;
@@ -64,7 +62,6 @@
 <p class="site-subtitle">Song Catalog</p>
 <div class="divider"></div>
 <div id="wrap"></div>
-<!-- 返回：使用card卡片组件，保持全站统一风格 -->
 <div class="card-list">
   <a class="card" href="catalog.html">
     <div class="card-text">
@@ -76,49 +73,45 @@
 </div>
 <script>
 const wrap = document.querySelector('#wrap');
-// 测试模拟数据，格式和txt完全一致
 const mockText = `# Single
 1. Shackles | Artist:Miuseshare | world music, rap
 https://song.link/s/0zRsSSJjkyZILkWoRnFoXs
 #AestheticMiuseshare,#AestheticDirection,#LiteraryAesthetic,#WorldMusic,#PaintingAesthetic
 #AestheticMiuseshare,#审美方向,#文学审美,#世界音乐,#绘画审美
+
 # Single
 2. Fragrant Shoulder Beauty | Artist:Miuseshare | world music, lofi
 https://song.link/s/6B044eLbIiTFBI5wdQqDGI
 #AestheticMiuseshare,#AestheticDirection,#LiteraryAesthetic,#WorldMusic,#PaintingAesthetic
 #AestheticMiuseshare,#审美方向,#文学审美,#世界音乐,#绘画审美
+
 # Single
 3. Wind in Your Ear | Artist:Miuseshare | world music, pop
 https://song.link/y/mEC4X383oyQ
 #AestheticMiuseshare,#AestheticDirection,#LiteraryAesthetic,#WorldMusic,#PaintingAesthetic
 #AestheticMiuseshare,#审美方向,#文学审美,#世界音乐,#绘画审美
 `;
-function renderBlock(lines){
+function parseBlock(blockLines){
   let groupRaw = '';
   let info = '';
   let link = '';
   let tagLines = [];
-  for(let l of lines){
+  for(let l of blockLines){
     const t = l.trim();
-    if(l.startsWith('# ') && !l.startsWith('#Aesthetic')){
+    if(t.startsWith('# ') && !t.startsWith('#Aesthetic')){
       groupRaw = t.replace('# ','');
     }else if(t.startsWith('http')){
       link = t;
     }else if(t.startsWith('#Aesthetic')){
       tagLines.push(t);
-    }else{
+    }else if(t !== ''){
       info = t;
     }
   }
-  let namePart = info;
-  let artist = '';
-  let genre = '';
   const sp = info.split(' | ');
-  if(sp.length >=3){
-    namePart = sp[0];
-    artist = sp[1];
-    genre = sp.slice(2).join(' ');
-  }
+  const namePart = sp[0];
+  const artist = sp[1] ?? '';
+  const genre = sp.slice(2).join(' ');
   let allTags = [];
   for(let tagLine of tagLines){
     const arr = tagLine.split(',');
@@ -153,22 +146,11 @@ ${groupHtml}
 `;
 }
 function renderAll(text){
-  const lines = text.split('\n');
+  const blocks = text.split(/\n\n+/);
   let html = '';
-  let blockLines = [];
-  for(const line of lines){
-    const t = line.trim();
-    if(t === ''){
-      if(blockLines.length > 0){
-        html += renderBlock(blockLines);
-        blockLines = [];
-      }
-      continue;
-    }
-    blockLines.push(t);
-  }
-  if(blockLines.length>0){
-    html += renderBlock(blockLines);
+  for(const b of blocks){
+    const lines = b.split('\n');
+    html += parseBlock(lines);
   }
   wrap.innerHTML = html;
 }
