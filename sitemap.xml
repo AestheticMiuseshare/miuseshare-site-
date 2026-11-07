@@ -35,5 +35,9 @@
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
+<url>
+<loc>https://aestheticmiuseshare.github.io/miuseshare-site-/pages/doc/doc-map.html</loc>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
 </urlset>
- 
