@@ -55,13 +55,21 @@
 .tag-item{
   display:inline-block;border:1px solid #777;border-radius:999px;padding:.22rem .6rem;margin:.2rem .15rem;color:#222;font-size:.8rem;
 }
+.load-note{
+  font-size:.85rem;
+  color:#777;
+  margin:1rem 0;
+}
 </style>
 </head>
 <body>
 <h1 class="site-title">曲目清单</h1>
 <p class="site-subtitle">Song Catalog</p>
 <div class="divider"></div>
+
 <div id="wrap"></div>
+<p class="load-note" id="note"></p>
+
 <div class="card-list">
   <a class="card" href="catalog.html">
     <div class="card-text">
@@ -73,88 +81,182 @@
 </div>
 <script>
 const wrap = document.querySelector('#wrap');
-const mockText = `# Single
-1. Shackles | Artist:Miuseshare | world music, rap
-https://song.link/s/0zRsSSJjkyZILkWoRnFoXs
-#AestheticMiuseshare,#AestheticDirection,#LiteraryAesthetic,#WorldMusic,#PaintingAesthetic
-#AestheticMiuseshare,#审美方向,#文学审美,#世界音乐,#绘画审美
+const note = document.querySelector('#note');
+const TXT_URL = './songscatalog.txt';
 
-# Single
-2. Fragrant Shoulder Beauty | Artist:Miuseshare | world music, lofi
-https://song.link/s/6B044eLbIiTFBI5wdQqDGI
-#AestheticMiuseshare,#AestheticDirection,#LiteraryAesthetic,#WorldMusic,#PaintingAesthetic
-#AestheticMiuseshare,#审美方向,#文学审美,#世界音乐,#绘画审美
+function esc(s){
+  return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
 
-# Single
-3. Wind in Your Ear | Artist:Miuseshare | world music, pop
-https://song.link/y/mEC4X383oyQ
-#AestheticMiuseshare,#AestheticDirection,#LiteraryAesthetic,#WorldMusic,#PaintingAesthetic
-#AestheticMiuseshare,#审美方向,#文学审美,#世界音乐,#绘画审美
-`;
-function parseBlock(blockLines){
-  let groupRaw = '';
+// 去掉序号前缀：1. / 1、 / 1)
+function stripIndex(s){
+  return s.replace(/^\s*\d+\s*[.、)）]\s*/,'').trim();
+}
+
+// 标签行拆分成数组：逗号(中英文) 与 空格 都当分隔符
+function splitTags(line){
+  const out = [];
+  const parts = line.split(/[,，]/);
+  for(const p of parts){
+    const words = p.split(/#+/);
+    for(let w of words){
+      w = w.trim().replace(/[,，]+$/,'');
+      if(w) out.push(w);
+    }
+  }
+  return out;
+}
+
+function parseBlock(lines){
+  let mode = 'single';
+  let album = '';
+  let waitAlbum = false;
+  let hasMarker = false;
   let info = '';
   let link = '';
-  let tagLines = [];
-  for(let l of blockLines){
-    const t = l.trim();
-    if(t.startsWith('# ') && !t.startsWith('#Aesthetic')){
-      groupRaw = t.replace('# ','');
-    }else if(t.startsWith('http')){
-      link = t;
-    }else if(t.startsWith('#Aesthetic')){
+  const tagLines = [];
+
+  for(const raw of lines){
+    const t = raw.trim();
+    if(!t) continue;
+
+    const m = t.match(/^#\s*(single|album)\s*$/i);
+    if(m){
+      mode = m[1].toLowerCase();
+      hasMarker = true;
+      waitAlbum = (mode === 'album');
+      continue;
+    }
+    if(t.startsWith('#')){
       tagLines.push(t);
-    }else if(t !== ''){
+      continue;
+    }
+    if(/^https?:\/\//i.test(t)){
+      link = t;
+      continue;
+    }
+    if(/^\s*\d+\s*[.、)）]/.test(t)){
       info = t;
+      continue;
     }
-  }
-  const sp = info.split(' | ');
-  const namePart = sp[0];
-  const artist = sp[1] ?? '';
-  const genre = sp.slice(2).join(' ');
-  let allTags = [];
-  for(let tagLine of tagLines){
-    const arr = tagLine.split(',');
-    for(let s of arr){
-      allTags.push(s.replace('#',''));
+    if(waitAlbum){
+      album = t;
+      waitAlbum = false;
+      continue;
     }
+    if(!info) info = t;
   }
-  allTags = [...new Set(allTags)];
-  let tagHtml = '';
-  for(let t of allTags){
-    tagHtml += `<span class="tag-item">${t}</span>`;
+
+  let body = stripIndex(info);
+  let name = body;
+  let artist = '';
+  let genre = '';
+
+  // 先处理 Artist:xxx 写法（有没有竖线都能认）
+  const am = body.match(/artist\s*[:：]/i);
+  if(am){
+    const i = am.index;
+    name = body.slice(0, i).replace(/[|｜]/g,' ').replace(/\s{2,}/g,' ').trim();
+    let rest = body.slice(i + am[0].length).trim();
+    const g = rest.split(/[|｜]/);
+    artist = (g[0] || '').trim();
+    genre = g.slice(1).map(x => x.trim()).filter(Boolean).join(' ');
+  }else if(/[|｜]/.test(body)){
+    const sp = body.split(/[|｜]/).map(x => x.trim());
+    name = sp[0] || body;
+    artist = sp[1] || '';
+    genre = sp.slice(2).filter(Boolean).join(' ');
   }
-  let groupHtml = '';
-  if(groupRaw){
-    if(groupRaw.trim() === 'Single'){
-      groupHtml = `<div class="group-title-single">Single 单曲</div>`;
-    }else{
-      groupHtml = `<div class="group-title-album">${groupRaw}</div>`;
+
+  let tags = [];
+  for(const line of tagLines){
+    tags = tags.concat(splitTags(line));
+  }
+  tags = [...new Set(tags)];
+
+  return {mode, album, name, artist, genre, link, tags, hasMarker};
+}
+
+function groupTitle(track){
+  if(track.mode === 'album'){
+    return track.album ? track.album : 'Album 专辑';
+  }
+  return 'Single 单曲';
+}
+
+function render(text){
+  const blocks = text
+    .replace(/\r/g,'')
+    .split(/\n{2,}/)
+    .map(b => b.split('\n').filter(l => l.trim() !== ''))
+    .filter(b => b.length);
+
+  let carryMode = 'single';
+  let carryAlbum = '';
+
+  const tracks = blocks
+    .map(parseBlock)
+    .map(t => {
+      if(t.hasMarker){
+        carryMode = t.mode;
+        carryAlbum = t.album;
+      }else{
+        // 没有 # 标记的曲目，继承上一块的专辑归属
+        t.mode = carryMode;
+        t.album = carryAlbum;
+      }
+      return t;
+    })
+    .filter(t => t.name || t.link);
+
+  let html = '';
+  let lastKey = null;
+
+  for(const t of tracks){
+    const key = t.mode + '|' + t.album;
+    if(key !== lastKey){
+      const cls = (t.mode === 'album') ? 'group-title-album' : 'group-title-single';
+      html += `<div class="${cls}">${esc(groupTitle(t))}</div>`;
+      lastKey = key;
     }
-  }
-  const linkHtml = link
-    ? `<a class="play-btn" href="${link}" target="_blank" rel="noopener noreferrer">Play</a>`
-    : '';
-  return `
-${groupHtml}
+
+    let tagHtml = '';
+    for(const tag of t.tags){
+      tagHtml += `<span class="tag-item">${esc(tag)}</span>`;
+    }
+
+    const meta = [t.artist, t.genre].filter(Boolean).join(' ｜ ');
+    const linkHtml = t.link
+      ? `<a class="play-btn" href="${esc(t.link)}" target="_blank" rel="noopener noreferrer">Play</a>`
+      : '';
+
+    html += `
 <div class="track-block">
-  <div class="track-name">${namePart}</div>
-  <div class="track-meta">${artist} &nbsp;｜&nbsp; ${genre}</div>
+  <div class="track-name">${esc(t.name)}</div>
+  <div class="track-meta">${esc(meta)}</div>
   ${linkHtml}
   <div class="tag-group">${tagHtml}</div>
 </div>
 `;
-}
-function renderAll(text){
-  const blocks = text.split(/\n\n+/);
-  let html = '';
-  for(const b of blocks){
-    const lines = b.split('\n');
-    html += parseBlock(lines);
   }
+
   wrap.innerHTML = html;
+  if(!tracks.length){
+    note.textContent = '曲目数据为空，请检查 songscatalog.txt';
+  }
 }
-renderAll(mockText);
+
+fetch(TXT_URL, {cache:'no-cache'})
+  .then(r => {
+    if(!r.ok) throw new Error('HTTP ' + r.status);
+    return r.text();
+  })
+  .then(render)
+  .catch(err => {
+    note.textContent = '曲目数据读取失败：' + err.message + '（请确认 songscatalog.txt 与本页在同一目录）';
+  });
 </script>
 </body>
 </html>
