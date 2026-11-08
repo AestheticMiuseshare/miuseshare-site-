@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - 'pages/songscatalog.txt'
-      - '.github/workflows/sync-songlist.yml'
+      - '.github/workflows/sync.yml'
   workflow_dispatch:
 
 permissions:
@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: 把 txt 原文写入 songlist.html
+      - name: 把 txt 原文写入 songlist.html 与 llms.txt
         run: python3 scripts/update-songlist.py
 
       - name: 有变化就提交
@@ -28,6 +28,6 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add pages/songlist.html
+          git add pages/songlist.html llms.txt
           git commit -m "chore: sync crawl text from songscatalog.txt [skip ci]"
           git push
