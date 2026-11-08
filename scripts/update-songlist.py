@@ -30,6 +30,15 @@ SAME_AS = [
     "https://url.cloud.huawei.com/CFQSfIHxLi",
 ]
 
+# 每首歌在 MusicBrainz 的发行组 ID（新建后填这里；没有的就不用写）
+MB_GROUPS = {
+    "Shackles": "d8719a71-d649-4b95-8dea-aad860a97dea",
+    "Fragrant Shoulder Beauty": "2488326c-318f-4478-8dd8-b5626b1ce1fd",
+    "Wind in Your Ear": "d911f556-df0a-4b92-9002-e8bc93db7ed9",
+    "Gentle Road": "3c8e9859-4133-49fd-a01a-41d407d1ca3d",
+    "Silent Moves": "cf3a8517-19ed-475f-8115-c993a1f59a57",
+}
+
 
 def read_body() -> str:
     raw = TXT.read_text(encoding="utf-8").replace("\r\n", "\n")
@@ -118,6 +127,9 @@ def sync_jsonld(body: str) -> bool:
             rec["genre"] = genre
         if link:
             rec["url"] = link
+        rg = MB_GROUPS.get(name.strip())
+        if rg:
+            rec["sameAs"] = ["https://musicbrainz.org/release-group/" + rg]
         graph.append(rec)
 
     payload = {"@context": "https://schema.org", "@graph": graph}
