@@ -6,6 +6,7 @@ on:
     paths:
       - 'pages/songscatalog.txt'
       - '.github/workflows/sync.yml'
+      - 'scripts/update-songlist.py'
   workflow_dispatch:
 
 permissions:
