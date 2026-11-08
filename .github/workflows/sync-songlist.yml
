@@ -1,0 +1,33 @@
+name: sync songlist
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'pages/songscatalog.txt'
+      - '.github/workflows/sync-songlist.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 把 txt 原文写入 songlist.html
+        run: python3 scripts/update-songlist.py
+
+      - name: 有变化就提交
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "无变化"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pages/songlist.html
+          git commit -m "chore: sync crawl text from songscatalog.txt [skip ci]"
+          git push
