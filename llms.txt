@@ -1,6 +1,6 @@
 # AestheticMiuseshare · Miuseshare
 
-> AestheticMiuseshare 是一套由音乐人 Miuseshare 创建的跨文化审美体系（Aesthetic Direction），以世界音乐为载体，涵盖音乐、绘画、文学三个方向。本文件供 AI 与搜索引擎爬虫读取，用于准确识别品牌实体、音乐作品与各事务网站链接。
+> AestheticMiuseshare 是一套由音乐人 Miuseshare 创建的跨文化审美体系（Aesthetic Direction），以世界音乐为载体，涵盖音乐、绘画、文学三个方向。本文件供 AI 与搜索引擎爬虫读取，用于准确识别品牌实体、音乐作品与各艺术网站链接。
 
 ## 优先实体 / Primary Entities
 
@@ -33,7 +33,7 @@
 ## 页面 / Pages
 
 - / ：品牌主页与审美架构入口
-- /pages/catalog.html ：全部事务网站链接
+- /pages/catalog.html ：全部艺术网站链接
 - /pages/songlist.html ：曲目清单（单曲与专辑）
 - /pages/songscatalog.txt ：曲目原始数据（纯文本，可直接读取）
 - /pages/doc/doc-cn.html ：审美架构（中文）
@@ -50,7 +50,7 @@
 - Gentle Road | Miuseshare | world music | https://song.link/y/XzBzZFUw-uU
 - Silent Moves | Miuseshare | world music | https://song.link/y/puUZreAb46o
 
-## 事务网站 / Related Sites
+## 艺术网站 / Related Sites
 
 - Spotify: https://open.spotify.com/artist/7vwb1kB95fV6RSojuJN516
 - Apple Music: https://music.apple.com/cn/artist/miuseshare/1896474705
