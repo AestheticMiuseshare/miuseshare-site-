@@ -18,6 +18,7 @@ LD_START = "<!-- ===== 结构化数据 · 自动生成 ===== -->"
 LD_END = "<!-- ===== 结构化数据结束 ===== -->"
 SITE = "https://aestheticmiuseshare.github.io/miuseshare-site-/"
 SAME_AS = [
+    "https://musicbrainz.org/artist/e2bf6774-ffae-415e-9260-1236a8d764b6",
     "https://open.spotify.com/artist/7vwb1kB95fV6RSojuJN516",
     "https://music.apple.com/cn/artist/miuseshare/1896474705",
     "https://music.amazon.com/artists/B0GX6T9FCY/miuseshare",
