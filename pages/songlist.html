@@ -27,6 +27,11 @@
   border-bottom:1px solid #cccccc;
   padding-bottom:0.4rem;
 }
+.track-index{
+  color:#888;
+  font-weight:normal;
+  margin-right:.3rem;
+}
 .track-name{
   font-size:1rem;
   font-weight:bold;
@@ -106,9 +111,10 @@ https://song.link/y/XzBzZFUw-uU
 #审美方向,#文学审美,#世界音乐,#绘画审美,#音乐分享
 
 # Single
-5. Silent Moves | Artist:Miuseshare | world music
+5. Silent Moves | Artist:Miuseshare | world music
 https://song.link/y/puUZreAb46o
-  #AestheticMiuseshare #Miuseshare#AestheticDirection #LiteraryAesthetic #WorldMusic #PaintingAesthetic,#审美方向,#文学审美,#世界音乐,#绘画审美</pre></noscript>
+#AestheticMiuseshare,#Miuseshare,#AestheticDirection,#LiteraryAesthetic,#WorldMusic,#PaintingAesthetic
+#审美方向,#文学审美,#世界音乐,#绘画审美,#音乐分享</pre></noscript>
 <!-- ===== 爬虫文本结束 ===== -->
 <script>
 const wrap = document.querySelector('#wrap');
@@ -245,7 +251,8 @@ function render(text){
   let html = '';
   let lastKey = null;
 
-  for(const t of tracks){
+  for(let ti = 0; ti < tracks.length; ti++){
+    const t = tracks[ti];
     const key = t.mode + '|' + t.album;
     if(key !== lastKey){
       const cls = (t.mode === 'album') ? 'group-title-album' : 'group-title-single';
@@ -265,7 +272,7 @@ function render(text){
 
     html += `
 <div class="track-block">
-  <div class="track-name">${esc(t.name)}</div>
+  <div class="track-name"><span class="track-index">${ti + 1}.</span> ${esc(t.name)}</div>
   <div class="track-meta">${esc(meta)}</div>
   ${linkHtml}
   <div class="tag-group">${tagHtml}</div>
