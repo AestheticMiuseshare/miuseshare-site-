@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""把 pages/songscatalog.txt 同步进 songlist.html 的 noscript 区块与 llms.txt 的曲目节。"""
+"""把 pages/songscatalog.txt 同步进 songlist.html 的文本块、结构化数据与 llms.txt 的曲目节。"""
 import html
+import json
 import re
 import sys
 from pathlib import Path
@@ -13,6 +14,20 @@ LLMS = ROOT / "llms.txt"
 START = "<!-- ===== 爬虫文本 · 改歌只改这一块 ===== -->"
 END = "<!-- ===== 爬虫文本结束 ===== -->"
 TRACK_HEAD = "## 曲目 / Tracks"
+LD_START = "<!-- ===== 结构化数据 · 自动生成 ===== -->"
+LD_END = "<!-- ===== 结构化数据结束 ===== -->"
+SITE = "https://aestheticmiuseshare.github.io/miuseshare-site-/"
+SAME_AS = [
+    "https://open.spotify.com/artist/7vwb1kB95fV6RSojuJN516",
+    "https://music.apple.com/cn/artist/miuseshare/1896474705",
+    "https://music.amazon.com/artists/B0GX6T9FCY/miuseshare",
+    "https://youtube.com/channel/UC7-dcWv8guFznVXXn-ao3xw",
+    "https://on.soundcloud.com/i8S7mP7Zw6oxQs3vo6",
+    "https://www.tumblr.com/miuseshare",
+    "https://www.facebook.com/share/1K5rAQRpeL/",
+    "https://pin.it/5AInrhm2f",
+    "https://url.cloud.huawei.com/CFQSfIHxLi",
+]
 
 
 def read_body() -> str:
@@ -56,7 +71,7 @@ def sync_html(body: str) -> bool:
     i = page.find(START)
     j = page.find(END)
     if i < 0 or j < 0 or j < i:
-        print("songlist.html 里找不到标记行，跳过")
+        print("songlist.html 里找不到文本块标记，跳过")
         return False
     escaped = html.escape(body)
     new_block = (
@@ -67,6 +82,52 @@ def sync_html(body: str) -> bool:
         + END
     )
     new_page = page[:i] + new_block + page[j + len(END):]
+    if new_page == page:
+        return False
+    HTML.write_text(new_page, encoding="utf-8")
+    return True
+
+
+def sync_jsonld(body: str) -> bool:
+    page = HTML.read_text(encoding="utf-8")
+    i = page.find(LD_START)
+    j = page.find(LD_END)
+    if i < 0 or j < 0 or j < i:
+        print("songlist.html 里找不到结构化数据标记，跳过")
+        return False
+
+    artist_id = SITE + "#miuseshare"
+    graph = [{
+        "@type": "MusicGroup",
+        "@id": artist_id,
+        "name": "Miuseshare",
+        "alternateName": "AestheticMiuseshare",
+        "description": "Miuseshare 是 AestheticMiuseshare 审美体系在音乐方向的创作者标识。",
+        "genre": "World Music",
+        "url": SITE + "pages/songlist.html",
+        "sameAs": SAME_AS,
+    }]
+    for name, artist, genre, link in parse_tracks(body):
+        rec = {
+            "@type": "MusicRecording",
+            "name": name,
+            "byArtist": {"@id": artist_id},
+        }
+        if genre:
+            rec["genre"] = genre
+        if link:
+            rec["url"] = link
+        graph.append(rec)
+
+    payload = {"@context": "https://schema.org", "@graph": graph}
+    block = (
+        LD_START
+        + '\n<script type="application/ld+json" id="track-ld">'
+        + json.dumps(payload, ensure_ascii=False, indent=2)
+        + "</script>\n"
+        + LD_END
+    )
+    new_page = page[:i] + block + page[j + len(LD_END):]
     if new_page == page:
         return False
     HTML.write_text(new_page, encoding="utf-8")
@@ -120,7 +181,8 @@ def main() -> int:
     body = read_body()
     changed_html = sync_html(body)
     changed_llms = sync_llms(body)
-    print("songlist.html 更新：%s，llms.txt 更新：%s" % (changed_html, changed_llms))
+    changed_ld = sync_jsonld(body)
+    print("songlist.html：%s，llms.txt：%s，结构化数据：%s" % (changed_html, changed_llms, changed_ld))
     return 0
 
 
