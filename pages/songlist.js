@@ -1,0 +1,185 @@
+const _css=document.createElement('style');
+_css.textContent=`.track-block{margin-bottom:1.6rem;padding:1rem;border:1px solid #ddd;border-radius:12px}
+.group-title-single{font-size:1.2rem;font-weight:bold;margin:2rem 0 .8rem;color:#222}
+.group-title-album{font-size:1.3rem;font-weight:bold;margin:2.2rem 0 1rem;color:#1a1a1a;border-bottom:1px solid #cccccc;padding-bottom:.4rem}
+.track-index{font-size:1rem;color:#222;font-weight:normal;margin-right:.25rem}
+.track-name{font-size:1rem;font-weight:bold}
+.track-meta{font-size:.88rem;color:#555;margin:.4rem 0 .8rem}
+.play-btn{display:inline-block;padding:.4rem .8rem;background:#f4f4f4;border:1px solid #ccc;border-radius:8px;text-decoration:none;color:#222;font-size:.85rem}
+.play-btn:active{background:#e9e9e9}
+.tag-group{margin-top:.8rem}
+.tag-item{display:inline-block;border:1px solid #777;border-radius:999px;padding:.22rem .6rem;margin:.2rem .15rem;color:#222;font-size:.8rem}
+.load-note{font-size:.85rem;color:#777;margin:1rem 0}`;
+document.head.appendChild(_css);
+
+const wrap = document.querySelector('#wrap');
+const note = document.querySelector('#note');
+const TXT_URL = './songscatalog.txt';
+
+function esc(s){
+  return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function stripIndex(s){
+  return s.replace(/^\s*\d+\s*[.、)）]\s*/,'').trim();
+}
+function splitTags(line){
+  const out = [];
+  const parts = line.split(/[,，]/);
+  for(const p of parts){
+    const words = p.split(/#+/);
+    for(let w of words){
+      w = w.trim().replace(/[,，]+$/,'');
+      if(w) out.push(w);
+    }
+  }
+  return out;
+}
+
+function parseBlock(lines){
+  let mode = 'single';
+  let album = '';
+  let waitAlbum = false;
+  let hasMarker = false;
+  let info = '';
+  let link = '';
+  const tagLines = [];
+
+  for(const raw of lines){
+    const t = raw.trim();
+    if(!t) continue;
+
+    const m = t.match(/^#\s*(single|album)\s*$/i);
+    if(m){
+      mode = m[1].toLowerCase();
+      hasMarker = true;
+      waitAlbum = (mode === 'album');
+      continue;
+    }
+    if(t.startsWith('#')){
+      tagLines.push(t);
+      continue;
+    }
+    if(/^https?:\/\//i.test(t)){
+      link = t;
+      continue;
+    }
+    if(/^\s*\d+\s*[.、)）]/.test(t)){
+      info = t;
+      continue;
+    }
+    if(waitAlbum){
+      album = t;
+      waitAlbum = false;
+      continue;
+    }
+    if(!info) info = t;
+  }
+
+  let body = stripIndex(info);
+  let name = body;
+  let artist = '';
+  let genre = '';
+  const am = body.match(/artist\s*[:：]/i);
+  if(am){
+    const i = am.index;
+    name = body.slice(0, i).replace(/[|｜]/g,' ').replace(/\s{2,}/g,' ').trim();
+    let rest = body.slice(i + am[0].length).trim();
+    const g = rest.split(/[|｜]/);
+    artist = (g[0] || '').trim();
+    genre = g.slice(1).map(x => x.trim()).filter(Boolean).join(' ');
+  }else if(/[|｜]/.test(body)){
+    const sp = body.split(/[|｜]/).map(x => x.trim());
+    name = sp[0] || body;
+    artist = sp[1] || '';
+    genre = sp.slice(2).filter(Boolean).join(' ');
+  }
+
+  let tags = [];
+  for(const line of tagLines){
+    tags = tags.concat(splitTags(line));
+  }
+  tags = [...new Set(tags)];
+
+  return {mode, album, name, artist, genre, link, tags, hasMarker};
+}
+
+function groupTitle(track){
+  if(track.mode === 'album'){
+    return track.album ? track.album : 'Album 专辑';
+  }
+  return 'Single 单曲';
+}
+
+function render(text){
+  const blocks = text
+    .replace(/\r/g,'')
+    .split(/\n{2,}/)
+    .map(b => b.split('\n').filter(l => l.trim() !== ''))
+    .filter(b => b.length);
+
+  let carryMode = 'single';
+  let carryAlbum = '';
+
+  const tracks = blocks
+    .map(parseBlock)
+    .map(t => {
+      if(t.hasMarker){
+        carryMode = t.mode;
+        carryAlbum = t.album;
+      }else{
+        t.mode = carryMode;
+        t.album = carryAlbum;
+      }
+      return t;
+    })
+    .filter(t => t.name || t.link);
+
+  let html = '';
+  let lastKey = null;
+
+  for(let ti = 0; ti < tracks.length; ti++){
+    const t = tracks[ti];
+    const key = t.mode + '|' + t.album;
+    if(key !== lastKey){
+      const cls = (t.mode === 'album') ? 'group-title-album' : 'group-title-single';
+      html += `<div class="${cls}">${esc(groupTitle(t))}</div>`;
+      lastKey = key;
+    }
+
+    let tagHtml = '';
+    for(const tag of t.tags){
+      tagHtml += `<span class="tag-item">${esc(tag)}</span>`;
+    }
+
+    const meta = [t.artist, t.genre].filter(Boolean).join(' ｜ ');
+    const linkHtml = t.link
+      ? `<a class="play-btn" href="${esc(t.link)}" target="_blank" rel="noopener noreferrer">Play</a>`
+      : '';
+
+    html += `
+<div class="track-block">
+  <div class="track-name"><span class="track-index">${ti + 1}.</span> ${esc(t.name)}</div>
+  <div class="track-meta">${esc(meta)}</div>
+  ${linkHtml}
+  <div class="tag-group">${tagHtml}</div>
+</div>
+`;
+  }
+
+  wrap.innerHTML = html;
+  if(!tracks.length){
+    note.textContent = '曲目数据为空，请检查 songscatalog.txt';
+  }
+}
+
+fetch(TXT_URL, {cache:'no-cache'})
+  .then(r => {
+    if(!r.ok) throw new Error('HTTP ' + r.status);
+    return r.text();
+  })
+  .then(render)
+  .catch(err => {
+    note.textContent = '曲目数据读取失败：' + err.message + '（请确认 songscatalog.txt 与本页在同一目录）';
+  });
