@@ -1,136 +1,56 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="Miuseshare 个人作品站：世界音乐作品目录、AestheticMiuseshare 审美体系（审美架构、词汇映射）与创作者简介，中英文双通道。">
-<link rel="canonical" href="https://aestheticmiuseshare.github.io/miuseshare-site-/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="AestheticMiuseshare | Miuseshare">
-<meta property="og:description" content="Miuseshare 个人作品站：世界音乐作品目录、AestheticMiuseshare 审美体系与创作者简介。">
-<meta property="og:url" content="https://aestheticmiuseshare.github.io/miuseshare-site-/">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://coverartarchive.org/release-group/d8719a71-d649-4b95-8dea-aad860a97dea/front-500">
-<title>AestheticMiuseshare</title>
-<meta property="og:site_name" content="Miuseshare" />
-<link rel="stylesheet" href="style.css">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebSite",
-      "@id": "https://aestheticmiuseshare.github.io/miuseshare-site-/#website",
-      "url": "https://aestheticmiuseshare.github.io/miuseshare-site-/",
-      "name": "Miuseshare",
-      "alternateName": "AestheticMiuseshare",
-      "description": "Miuseshare 的个人作品站：世界音乐作品目录、审美体系说明与创作者简介。",
-      "inLanguage": "zh-CN",
-      "publisher": {
-        "@id": "https://aestheticmiuseshare.github.io/miuseshare-site-/#aestheticmiuseshare"
-      }
-    },
-    {
-      "@type": "Brand",
-      "@id": "https://aestheticmiuseshare.github.io/miuseshare-site-/#aestheticmiuseshare",
-      "name": "AestheticMiuseshare",
-      "alternateName": "Aesthetic Miuseshare",
-      "description": "AestheticMiuseshare 是一套跨文化的审美体系，以世界音乐为载体，涵盖音乐、绘画、文学三个方向。",
-      "url": "https://aestheticmiuseshare.github.io/miuseshare-site-/",
-      "slogan": "音乐为载体，画面为形，人文思考为内核",
-      "sameAs": [
-        "https://www.tumblr.com/miuseshare",
-        "https://pin.it/5AInrhm2f"
-      ]
-    },
-    {
-      "@type": "MusicGroup",
-      "@id": "https://aestheticmiuseshare.github.io/miuseshare-site-/#miuseshare",
-      "name": "Miuseshare",
-      "alternateName": "AestheticMiuseshare",
-      "description": "Miuseshare 是 AestheticMiuseshare 审美体系在音乐方向的创作者标识。",
-      "genre": "World Music",
-      "url": "https://aestheticmiuseshare.github.io/miuseshare-site-/",
-      "memberOf": {
-        "@id": "https://aestheticmiuseshare.github.io/miuseshare-site-/#aestheticmiuseshare"
-      },
-      "sameAs": [
-        "https://musicbrainz.org/artist/e2bf6774-ffae-415e-9260-1236a8d764b6",
-        "https://open.spotify.com/artist/7vwb1kB95fV6RSojuJN516",
-        "https://music.apple.com/cn/artist/miuseshare/1896474705",
-        "https://music.amazon.com/artists/B0GX6T9FCY/miuseshare",
-        "https://youtube.com/channel/UC7-dcWv8guFznVXXn-ao3xw",
-        "https://on.soundcloud.com/i8S7mP7Zw6oxQs3vo6",
-        "https://www.tumblr.com/miuseshare",
-        "https://www.facebook.com/share/1K5rAQRpeL/",
-        "https://pin.it/5AInrhm2f",
-        "https://url.cloud.huawei.com/CFQSfIHxLi"
-      ]
-    }
-  ]
-}
-</script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AestheticMiuseshare，世界音乐原创专辑审美与创作体系">
+    <meta name="keywords" content="AestheticMiuseshare, world music, lofi, original composition">
+    <meta name="author" content="Miuseshare">
+    <link rel="canonical" href="https://miuseshare.miuseshare.workers.dev/">
+    <title>AestheticMiuseshare</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{
+            max-width:700px;
+            margin:4rem auto;
+            padding:0 1rem;
+            font-family:system-ui,-apple-system,sans-serif;
+            line-height:1.7;
+            color:#222;
+        }
+        h1{
+            font-size:2.4rem;
+            margin-bottom:0.6rem;
+        }
+        .subtitle{
+            color:#666;
+            margin-bottom:2.5rem;
+        }
+        h3{
+            margin:2rem 0 0.8rem;
+        }
+        a{
+            color:#2563eb;
+            text-decoration:none;
+        }
+        a:hover{
+            text-decoration:underline;
+        }
+    </style>
 </head>
-
 <body>
-  <h1 class="site-title">AestheticMiuseshare</h1>
-  <p class="site-subtitle">审美体系定义 · Aesthetic Direction</p>
-  <div class="divider"></div>
+    <h1>AestheticMiuseshare</h1>
+    <p class="subtitle">审美体系定义 · Aesthetic Direction</p>
 
-  <div class="group">
-    <h2 class="group-title">审美体系 / AESTHETIC SYSTEM</h2>
-    <div class="card-list">
-      <a class="card" href="pages/as-cn.html">
-        <div class="card-text">
-          <span class="card-main">中文版</span>
-          <span class="card-sub">Chinese Version</span>
-        </div>
-        <span class="card-arrow">→</span>
-      </a>
+    <h3>审美架构</h3>
+    <p><a href="pages/doc-cn.html">中文版本</a></p>
+    <p><a href="pages/doc-en.html">English Version</a></p>
 
-      <a class="card" href="pages/as-en.html">
-        <div class="card-text">
-          <span class="card-main">English Version</span>
-          <span class="card-sub">英文版</span>
-        </div>
-        <span class="card-arrow">→</span>
-      </a>
-    </div>
-  </div>
+    <h3>创作者简介</h3>
+    <p><a href="pages/doc-about-cn.html">中文版本</a></p>
+    <p><a href="pages/doc-about-en.html">English Version</a></p>
 
-  <div class="group">
-    <h2 class="group-title">创作者简介 / CREATOR INTRODUCTION</h2>
-    <div class="card-list">
-      <a class="card" href="pages/doc/doc-about-cn.html">
-        <div class="card-text">
-          <span class="card-main">中文版本</span>
-          <span class="card-sub">Chinese Version</span>
-        </div>
-        <span class="card-arrow">→</span>
-      </a>
-
-      <a class="card" href="pages/doc/doc-about-en.html">
-        <div class="card-text">
-          <span class="card-main">English Version</span>
-          <span class="card-sub">英文版本</span>
-        </div>
-        <span class="card-arrow">→</span>
-      </a>
-    </div>
-  </div>
-
-  <div class="group">
-    <h2 class="group-title">收听与主页 / LISTEN & PROFILES</h2>
-    <div class="card-list">
-      <a class="card" href="pages/catalog.html">
-        <div class="card-text">
-          <span class="card-main">艺术网站</span>
-          <span class="card-sub">Art Platforms</span>
-        </div>
-        <span class="card-arrow">→</span>
-      </a>
-    </div>
-  </div>
+    <h3>收听与主页 / Listen &amp; Profiles</h3>
+    <p><a href="pages/links.html">全部官方链接 / All Official Links</a></p>
 </body>
 </html>
