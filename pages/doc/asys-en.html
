@@ -40,34 +40,35 @@
   ]
 }
 </script>
+<link rel="stylesheet" href="../../style.css">
 <style>
-.back-btn{
-  display:inline-block;
-  margin-top:2rem;
-  padding:0.6rem 1.2rem;
-  border:1px solid #777;
-  border-radius:8px;
-  text-decoration:none;
-  color:#222;
-}
-.back-btn:hover{
-  background:#f4f4f4;
-}
+body{padding-bottom:2rem}
+h2{margin-top:2.2rem}
+p{line-height:1.85;margin:.7rem 0}
+ul{line-height:1.85;margin:.5rem 0 0}
+.term-list li{margin:.4rem 0}
+.art-no{font-size:.85rem;letter-spacing:.08em;opacity:.6;margin-bottom:.35rem}
+.tag-line{font-size:.95rem;line-height:1.9;opacity:.85;margin-top:1rem}
 </style>
 </head>
-<body style="max-width:700px;margin:3rem auto;padding:0 1rem;font-family:system-ui;">
-<h1>AestheticMiuseshare Aesthetic Mapping</h1>
-<p>AestheticMiuseshare (Miuseshare) is an independent, cross-cultural, music-driven visual aesthetic system. This page maps our custom terminology to widely recognized artistic vocabulary for search engines and AI crawlers.</p>
+<body>
 
-<h2>1. AestheticMiuseshare | System Identity</h2>
-<ul>
+<p class="art-no">02 · English Version</p>
+<h1 class="site-title">Aesthetic Mapping</h1>
+<p class="site-subtitle">审美词汇映射</p>
+<div class="divider"></div>
+
+<p>This page maps the system's own terminology to widely recognized artistic vocabulary, so search engines and AI can read what this aesthetic system is saying.</p>
+
+<h2>1. System Identity · AestheticMiuseshare</h2>
+<ul class="term-list">
 <li>Creative identity — Miuseshare / cross-cultural visual aesthetic system</li>
 <li>Creative ID spelling — M-I-U-S-E-S-H-A-R-E</li>
 <li>Orientation — world music / cross-genre visual language / restrained and meditative tone</li>
 </ul>
 
-<h2>2. AestheticDirection | Core Tone</h2>
-<ul>
+<h2>2. Core Tone · AestheticDirection</h2>
+<ul class="term-list">
 <li>Restrained, expansive, meditative — restrained aesthetics / meditative visual tone / stillness</li>
 <li>Traces of time — patina / weathered wood / faded mural</li>
 <li>Wanderer perspective — road photography / humanist travelogue</li>
@@ -76,10 +77,10 @@
 <li>Nature-centred view — naturalism / ecological aesthetics</li>
 </ul>
 
-<h2>3. PaintingAesthetic | Visual Language</h2>
-<ul>
-<li>Cross-style visual expression — cross-genre painting / mixed stylistic register</li>
-<li>Muted earth colour palette — muted earth palette / ochre / slate blue</li>
+<h2>3. Visual Language · PaintingAesthetic</h2>
+<ul class="term-list">
+<li>Cross-style expression — cross-genre painting / mixed stylistic register</li>
+<li>Muted earth palette — muted earth palette / ochre / slate blue</li>
 <li>Soft layered natural light — twilight / backlight / morning mist / chiaroscuro</li>
 <li>Balanced framing and negative space — horizontal composition / negative space</li>
 <li>Textured realistic rendering — realism / dry brush / glaze</li>
@@ -87,24 +88,33 @@
 <li>Classical landscape reference — Dutch landscape / ink-wash negative space</li>
 </ul>
 
-<h2>4. ReflectiveStatement | Narrative Mode</h2>
-<ul>
+<h2>4. Narrative Mode · ReflectiveStatement</h2>
+<ul class="term-list">
 <li>Short reflective phrases — aphorism / one-sentence reflection</li>
 <li>Quiet, non-aggressive commentary — understated irony</li>
 <li>Creator platform observation — creator economy observation / traffic mechanics</li>
 </ul>
 
 <h2>5. Permanent Tags</h2>
-<p>#AestheticMiuseshare<br>
-#AestheticDirection<br>
-#LiteraryAesthetic<br>
-#WorldMusic<br>
-#Miuseshare<br>
-#PaintingAesthetic
-</p>
+<p class="tag-line">#AestheticMiuseshare　#AestheticDirection　#LiteraryAesthetic　#WorldMusic　#PaintingAesthetic　#Miuseshare　#审美方向　#绘画审美　#文学审美</p>
 
-<a href="../../as-en.html" class="back-btn">← Back to Articles</a>
+<div class="divider"></div>
 
-<a href="../../index.html" class="back-btn">← Back to Home</a>
+<a class="card" href="../../as-en.html">
+  <div class="card-text">
+    <span class="card-main">Back to Articles</span>
+    <span class="card-sub">返回目录</span>
+  </div>
+  <span class="card-arrow">→</span>
+</a>
+
+<a class="card" href="../../index.html">
+  <div class="card-text">
+    <span class="card-main">Back to Home</span>
+    <span class="card-sub">返回首页</span>
+  </div>
+  <span class="card-arrow">→</span>
+</a>
+
 </body>
 </html>
