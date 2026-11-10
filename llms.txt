@@ -40,8 +40,10 @@
 - /pages/as-en.html ：Aesthetic System directory（English）
 - /pages/doc/asjg-cn.html ：审美架构（中文）
 - /pages/doc/asys-cn.html ：审美词汇映射（中文）
+- /pages/doc/perspective-cn.html ：我的艺术审美见解：音乐 · 歌词 · 画面（中文）
 - /pages/doc/asjg-en.html ：Aesthetic Architecture（English）
 - /pages/doc/asys-en.html ：Aesthetic Mapping（English）
+- /pages/doc/perspective-en.html ：My Artistic Perspective: Music · Lyrics · Imagery（English）
 - /pages/doc/doc-about-cn.html ：创作者简介（中文）
 - /pages/doc/doc-about-en.html ：创作者简介（英文）
 
