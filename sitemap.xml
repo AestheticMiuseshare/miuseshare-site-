@@ -48,6 +48,12 @@
 <priority>0.7</priority>
 </url>
 <url>
+<loc>https://aestheticmiuseshare.github.io/miuseshare-site-/pages/doc/perspective-cn.html</loc>
+<lastmod>2026-11-10</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
 <loc>https://aestheticmiuseshare.github.io/miuseshare-site-/pages/doc/asjg-en.html</loc>
 <lastmod>2026-11-09</lastmod>
 <changefreq>monthly</changefreq>
@@ -56,6 +62,12 @@
 <url>
 <loc>https://aestheticmiuseshare.github.io/miuseshare-site-/pages/doc/asys-en.html</loc>
 <lastmod>2026-11-09</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://aestheticmiuseshare.github.io/miuseshare-site-/pages/doc/perspective-en.html</loc>
+<lastmod>2026-11-10</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
