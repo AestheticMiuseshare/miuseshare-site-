@@ -42,8 +42,8 @@
 }
 .link-name{font-size:0.95rem;}
 .link-arrow{color:#666;font-size:1.1rem;}
-.site-title{font-size:1.45rem !important; margin-bottom:0.1rem !important; padding-top:0 !important;}
-.site-subtitle{margin-bottom:0.45rem !important; font-size:0.9rem !important}
+.site-title{font-size:1.45rem !important; margin-bottom:0.1rem !important; padding-top:0 !important; text-align:center !important;}
+.site-subtitle{margin-bottom:0.45rem !important; font-size:0.9rem !important; text-align:center !important}
 .divider{margin-bottom:0.6rem !important}
 body{padding-top:14px !important}
 </style>
@@ -121,20 +121,21 @@ body{padding-top:14px !important}
   </li>
   <li class="link-item">
     <a class="link-row" href="songlist.html">
-      <span class="link-name">📜 曲目清单 / Music Catalog</span>
+      <span class="link-name">📜 歌曲目录 / Song Catalog</span>
       <span class="link-arrow">→</span>
     </a>
   </li>
 </ul>
-<div class="card-list">
-  <a class="card" href="../index.html">
-    <div class="card-text">
-      <span class="card-main">返回首页</span>
-      <span class="card-sub">Back to Home</span>
-    </div>
-    <span class="card-arrow">→</span>
-  </a>
+<div class="divider"></div>
+
+<div style="max-width:700px;margin:0 auto 1.5rem auto;padding:0.7rem 1.2rem;border-radius:12px;border:1px solid #e2e2e2;background:#fcfcfc;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:0.2s ease;" onclick="location.href='../index.html'">
+  <div>
+    <div style="font-size:1.1rem;font-weight:500;">返回首页</div>
+    <div style="font-size:0.9rem;color:#555;">Back to Home</div>
+  </div>
+  <span style="font-size:1.2rem;">→</span>
 </div>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
