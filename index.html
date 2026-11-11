@@ -8,72 +8,91 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="AestheticMiuseshare | Miuseshare">
 <meta property="og:description" content="Miuseshare 个人作品站：世界音乐作品目录、AestheticMiuseshare 审美体系与创作者简介。">
-<meta property="og:url" content="https://aestheticmiuseshare.github.io/miuseshare-site-/">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://aestheticmiuseshare.github.io/miuseshare-site-/assets/images/oglinkportal.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://aestheticmiuseshare.github.io/miuseshare-site-/assets/images/oglinkportal.png">
-<meta property="og:site_name" content="Miuseshare" />
 <title>AestheticMiuseshare</title>
-<link rel="stylesheet" href="style.css">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebSite",
-      "@id": "https://aestheticmiuseshare.github.io/miuseshare-site-/#website",
-      "url": "https://aestheticmiuseshare.github.io/miuseshare-site-/",
-      "name": "Miuseshare",
-      "alternateName": "AestheticMiuseshare",
-      "description": "Miuseshare 的个人作品站：世界音乐作品目录、审美体系说明与创作者简介。",
-      "inLanguage": "zh-CN",
-      "publisher": {
-        "@id": "https://aestheticmiuseshare.github.io/miuseshare-site-/#miuseshare"
-      }
-    },
-    {
-      "@type": "Brand",
-      "@id": "https://aestheticmiuseshare.github.io/miuseshare-site-/#aestheticmiuseshare",
-      "name": "AestheticMiuseshare",
-      "alternateName": "Aesthetic Miuseshare",
-      "description": "AestheticMiuseshare 是一套跨文化的审美体系，以世界音乐为载体，涵盖音乐、绘画、文学三个方向。",
-      "url": "https://aestheticmiuseshare.github.io/miuseshare-site-/",
-      "slogan": "音乐为载体，画面为形，人文思考为内核",
-      "sameAs": [
-        "https://www.tumblr.com/miuseshare",
-        "https://pin.it/5AInrhm2f"
-      ]
-    },
-    {
-      "@type": "MusicGroup",
-      "@id": "https://aestheticmiuseshare.github.io/miuseshare-site-/#miuseshare",
-      "name": "Miuseshare",
-      "alternateName": "AestheticMiuseshare",
-      "description": "Miuseshare 是 AestheticMiuseshare 审美体系在音乐方向的创作者标识。",
-      "genre": ["World Music"],
-      "image": "https://aestheticmiuseshare.github.io/miuseshare-site-/assets/images/oglinkportal.png",
-      "url": "https://aestheticmiuseshare.github.io/miuseshare-site-/",
-      "memberOf": {
-        "@id": "https://aestheticmiuseshare.github.io/miuseshare-site-/#aestheticmiuseshare"
-      },
-      "sameAs": [
-        "https://musicbrainz.org/artist/e2bf6774-ffae-415e-9260-1236a8d764b6",
-        "https://open.spotify.com/artist/7vwb1kB95fV6RSojuJN516",
-        "https://www.apple.com/cn/artist/miuseshare/1896474705",
-        "https://www.amazon.com/artists/B0GX6T9FCY/miuseshare",
-        "https://youtube.com/channel/UC7-dcWv8guFznVXXn-ao3xw",
-        "https://on.soundcloud.com/i8S7mP7Zw6oxQs3vo6",
-        "https://www.tumblr.com/miuseshare",
-        "https://www.facebook.com/share/1K5rAQRpeL/",
-        "https://pin.it/5AInrhm2f",
-        "https://url.cloud.huawei.com/CFQSfIHxLi"
-      ]
-    }
-  ]
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+    max-width:720px;
+    margin:0 auto;
+    padding:40px 18px 64px;
+    font-family:system-ui, sans-serif;
+    background:#fff;
+    color:#222;
 }
-</script>
-<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "edcbce576d504bb8bd4a30b8d9b3335d"}'></script><!-- End Cloudflare Web Analytics -->
+.site-title{
+    font-size:clamp(32px,8vw,48px);
+    font-weight:900;
+    letter-spacing:-0.03em;
+    line-height:0.92;
+    margin-bottom:0px;
+}
+.site-subtitle{
+    font-size:1.1rem;
+    color:#666;
+    margin-bottom:16px;
+}
+.divider{
+    height:1px;
+    background:#ddd;
+    margin:18px 0;
+}
+.group{
+    margin-bottom:10px;
+}
+.group-title{
+    font-size:clamp(20px,4.8vw,26px);
+    font-weight:900;
+    margin:24px 0 12px;
+    line-height:1.1;
+    color:#111;
+}
+.card-list{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+.card{
+    width:100%;
+    padding:7px 18px;
+    border:1px solid #e8e8e8;
+    border-radius:16px;
+    background:#fff;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    text-decoration:none;
+    gap:12px;
+}
+.card-text{
+    flex:1 1 auto;
+    min-width:0;
+}
+.card-main{
+    font-size:1.2rem;
+    color:#4f4f4f;
+    font-weight:500;
+    display:block;
+}
+.card-sub{
+    font-size:0.92rem;
+    color:#949494;
+    margin-top:2px;
+    display:block;
+}
+.card-arrow-wrap{
+    width:31px;
+    height:31px;
+    border-radius:50%;
+    background:#f4f6fa;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.card-arrow{
+    font-size:1rem;
+    color:#3366dd;
+}
+</style>
 </head>
 <body>
   <h1 class="site-title">AestheticMiuseshare</h1>
@@ -87,14 +106,18 @@
           <span class="card-main">中文版</span>
           <span class="card-sub">Chinese Version</span>
         </div>
-        <span class="card-arrow">→</span>
+        <div class="card-arrow-wrap">
+            <span class="card-arrow">→</span>
+        </div>
       </a>
       <a class="card" href="pages/as-en.html">
         <div class="card-text">
-          <span class="card-main">英文版</span>
-          <span class="card-sub">English Version</span>
+          <span class="card-main">English Version</span>
+          <span class="card-sub">英文版</span>
         </div>
-        <span class="card-arrow">→</span>
+        <div class="card-arrow-wrap">
+            <span class="card-arrow">→</span>
+        </div>
       </a>
     </div>
   </div>
@@ -106,14 +129,18 @@
           <span class="card-main">中文版本</span>
           <span class="card-sub">Chinese Version</span>
         </div>
-        <span class="card-arrow">→</span>
+        <div class="card-arrow-wrap">
+            <span class="card-arrow">→</span>
+        </div>
       </a>
       <a class="card" href="pages/doc/doc-about-en.html">
         <div class="card-text">
           <span class="card-main">English Version</span>
-          <span class="card-sub">English Version</span>
+          <span class="card-sub">英文版</span>
         </div>
-        <span class="card-arrow">→</span>
+        <div class="card-arrow-wrap">
+            <span class="card-arrow">→</span>
+        </div>
       </a>
     </div>
   </div>
@@ -125,7 +152,9 @@
           <span class="card-main">艺术网站</span>
           <span class="card-sub">Art Platforms</span>
         </div>
-        <span class="card-arrow">→</span>
+        <div class="card-arrow-wrap">
+            <span class="card-arrow">→</span>
+        </div>
       </a>
     </div>
   </div>
