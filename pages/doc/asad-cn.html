@@ -44,9 +44,9 @@ ul{line-height:1.85;margin:.5rem 0 0}
 </head>
 <body>
 
-<!-- 中文页面顶部曲目清单卡片，放在标题上方 -->
+<!-- 歌曲目录卡片 -->
 <div style="max-width:700px;margin:0 auto 1.5rem auto;padding:0.7rem 1.2rem;border-radius:12px;border:1px solid #e2e2e2;background:#fcfcfc;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:0.2s ease;" onclick="location.href='/pages/catalog.html'">
-  <span style="font-family:'ZCOOL XiaoWei',serif;font-size:1rem;color:#333;">曲目清单</span>
+  <span style="font-family:'ZCOOL XiaoWei',serif;font-size:1rem;color:#333;">歌曲目录</span>
   <span style="font-size:1.2rem;">→</span>
 </div>
 
@@ -55,13 +55,10 @@ ul{line-height:1.85;margin:.5rem 0 0}
 <p class="site-subtitle">Aesthetic Dissemination Exploration</p>
 <div class="divider"></div>
 
-<h2>阅读前置要点</h2>
-<p>本文句子提炼自歌词创作，建立在前三层审美理论之上：</p>
 <p>1. 个人艺术审美见解：创作者形成独属于自己的审美认知、创作立场，音乐、文字、画面三位一体，这是一切创作的根基。</p>
 <p>2. 审美架构：把零散的审美想法整理成一套完整、稳定、自洽的体系，用来指导创作。</p>
 <p>3. 审美词汇映射：把创作者内部的审美概念，翻译成网络平台、搜索引擎、AI可读的关键词与语义，打通作品和受众之间的隔阂。</p>
 
-<h2>审美传播探索（本文主体）</h2>
 <p>当创作者完成前面三层建设，作品就不再是孤立的产出。以音乐行业为例，审美传播依托这套审美框架，在网络上将歌词与音乐匹配到合适的听众。这套方式仍处于试验阶段。</p>
 <p>这套传播方案并非固定模板，需要持续测试调整。</p>
 <p>依托稳定的审美见解、审美架构、词汇映射，作品拥有统一的审美内核。审美词汇映射充当桥梁，帮助推荐系统理解歌词与音乐特质，推送给理念契合的受众。</p>
@@ -88,21 +85,33 @@ ul{line-height:1.85;margin:.5rem 0 0}
 
 <div class="divider"></div>
 
-<!-- 曲目清单卡片 -->
+<!-- 上一篇 / 下一篇 导航卡片，中间竖分隔线，箭头在文字左侧 -->
+<div style="display:flex;gap:1rem;max-width:700px;margin:0 auto 1.5rem auto;">
+  <!-- 左侧：上一篇 -->
+  <div style="flex:1;padding:0.7rem 1.2rem;border-radius:12px;border:1px solid #e2e2e2;background:#fcfcfc;cursor:pointer;transition:0.2s ease;display:flex;align-items:center;" onclick="location.href='../asys-cn.html'">
+    <span style="font-size:1.2rem;">←</span>
+    <span style="font-size:1rem;color:#333;margin-left:0.5rem;">上一篇</span>
+  </div>
+  <!-- 中间竖分隔参照线，以后右侧加下一篇时继续保留 -->
+  <div style="width:1px;background:#dddddd;"></div>
+  <!-- 右侧：下一篇，以后新增文章再打开 -->
+  <!--
+  <div style="flex:1;padding:0.7rem 1.2rem;border-radius:12px;border:1px solid #e2e2e2;background:#fcfcfc;cursor:pointer;transition:0.2s ease;display:flex;align-items:center;justify-content:flex-end;" onclick="location.href='下一篇文件名.html'">
+    <span style="font-size:1rem;color:#333;margin-right:0.5rem;">下一篇</span>
+    <span style="font-size:1.2rem;">→</span>
+  </div>
+  -->
+</div>
+
+<!-- 歌曲目录 -->
 <div style="max-width:700px;margin:0 auto 1.5rem auto;padding:0.7rem 1.2rem;border-radius:12px;border:1px solid #e2e2e2;background:#fcfcfc;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:0.2s ease;" onclick="location.href='/pages/catalog.html'">
-  <span style="font-family:'ZCOOL XiaoWei',serif;font-size:1rem;color:#333;">曲目清单</span>
+  <span style="font-family:'ZCOOL XiaoWei',serif;font-size:1rem;color:#333;">歌曲目录</span>
   <span style="font-size:1.2rem;">→</span>
 </div>
 
-<!-- 返回上一级卡片 -->
-<div style="max-width:700px;margin:0 auto 1rem auto;padding:0.7rem 1.2rem;border-radius:12px;border:1px solid #e2e2e2;background:#fcfcfc;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:0.2s ease;" onclick="location.href='../as-cn.html'">
-  <span style="font-size:1rem;color:#333;">返回上一级</span>
-  <span style="font-size:1.2rem;">→</span>
-</div>
-
-<!-- 返回首页卡片 -->
+<!-- 返回首页 -->
 <div style="max-width:700px;margin:0 auto 1.5rem auto;padding:0.7rem 1.2rem;border-radius:12px;border:1px solid #e2e2e2;background:#fcfcfc;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:0.2s ease;" onclick="location.href='../../index.html'">
-  <span style="font-size:1rem;color:#333;">返回首页</span>
+  <span style="font-size:1rem;color:#333;">Home</span>
   <span style="font-size:1.2rem;">→</span>
 </div>
 
