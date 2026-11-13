@@ -1,3 +1,8 @@
+## 简介 / About
+
+Miuseshare，AestheticMiuseshare 审美体系下的音乐创作项目。
+以世界音乐为核心，融合各地民族音色，偏向氛围感、叙事感器乐作品。
+
 ## 艺术网站 / Related Sites
 
 - Spotify: https://open.spotify.com/artist/7vwb1kB95fV6RSojuJN516
@@ -10,3 +15,21 @@
 - Pinterest: https://pin.it/5AInrhm2f
 - Huawei: https://url.cloud.huawei.com/CFQSfIHxLi
 - Discogs: https://www.discogs.com/artist/18539858-Miuseshare
+
+## 曲目 / Tracks
+
+- Shackles | Miuseshare | world music, rap | https://song.link/s/0zRsSSJjkyZILkWoRnFoXs
+- Fragrant Shoulder Beauty | Miuseshare | world music, Lofi | https://song.link/s/6B044eLbIiTFBI5wdQqDGI
+- Wind in Your Ear | Miuseshare | world music, Pop | https://song.link/y/mEC4X383oyQ
+- Gentle Road | Miuseshare | world music,EDM | https://song.link/y/XzBzZFUw-uU
+- Silent Moves | Miuseshare | world music,Dance | https://song.link/y/puUZreAb46o
+- Dunhuang Apsaras Dance | Miuseshare | world music,Dance | https://song.link/s/5XvGr0TlHsMak1sYKF6kBr
+- Butterfly in My Hand | Miuseshare | world music,Ambient | https://song.link/s/2YglVEvXxldtNIIDqFCT8Z
+- Soft Drift | Miuseshare | world music,Ambient | https://song.link/s/2PfGWdM9liZlXxCsQLdsMw
+- Chase the Wind by Moonlight | Miuseshare | world music,Ambient | https://song.link/s/1MwRM5FmNkM6oojQo7pLF5
+- Stellar Trip | Miuseshare | world music, Ambient | https://song.link/s/6GRMLZ18f0cMN57nSQTuQp
+
+## 页面清单 / Pages
+
+- /pages/catalog.html 播放首页
+- /pages/songlist.html 完整歌曲目录
