@@ -37,6 +37,11 @@ MB_GROUPS = {
     "Wind in Your Ear": "d911f556-df0a-4b92-9002-e8bc93db7ed9",
     "Gentle Road": "3c8e9859-4133-49fd-a01a-41d407d1ca3d",
     "Silent Moves": "cf3a8517-19ed-475f-8115-c993a1f59a57",
+    "Dunhuang Apsaras Dance": "bec72c43-1a57-4158-a544-de78273e72a5",
+    "Butterfly in My Hand": "7e7681d2-ca8b-4dd1-96a2-0713b97fb1b1",
+    "Soft Drift": "04630c4e-26e0-47f8-9cc4-5ffbee7fb2b2",
+    "Chase the Wind by Moonlight": "4db7e8d6-8570-4d63-9718-1bcbc020be7d",
+    "Stellar Trip": "4c6dad04-c983-4c91-9baf-ba0694087f0d",
 }
 
 
