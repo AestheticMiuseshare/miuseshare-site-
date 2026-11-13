@@ -28,6 +28,7 @@ SAME_AS = [
     "https://www.facebook.com/share/1K5rAQRpeL/",
     "https://pin.it/5AInrhm2f",
     "https://url.cloud.huawei.com/CFQSfIHxLi",
+    "https://www.discogs.com/artist/18539858-Miuseshare",
 ]
 
 # 每首歌在 MusicBrainz 的发行组 ID（新建后填这里；没有的就不用写）
@@ -42,6 +43,20 @@ MB_GROUPS = {
     "Soft Drift": "04630c4e-26e0-47f8-9cc4-5ffbee7fb2b2",
     "Chase the Wind by Moonlight": "4db7e8d6-8570-4d63-9718-1bcbc020be7d",
     "Stellar Trip": "4c6dad04-c983-4c91-9baf-ba0694087f0d",
+}
+
+# Discogs Release ID 映射
+DISCOGS_RELEASES = {
+    "Shackles": "39017531",
+    "Fragrant Shoulder Beauty": "39017840",
+    "Wind in Your Ear": "39017882",
+    "Gentle Road": "39017939",
+    "Silent Moves": "39017978",
+    "Dunhuang Apsaras Dance": "39018014",
+    "Butterfly in My Hand": "39018044",
+    "Soft Drift": "39018059",
+    "Chase the Wind by Moonlight": "39018083",
+    "Stellar Trip": "39018122",
 }
 
 
@@ -132,9 +147,15 @@ def sync_jsonld(body: str) -> bool:
             rec["genre"] = genre
         if link:
             rec["url"] = link
+        same_as_list = []
         rg = MB_GROUPS.get(name.strip())
         if rg:
-            rec["sameAs"] = ["https://musicbrainz.org/release-group/" + rg]
+            same_as_list.append("https://musicbrainz.org/release-group/" + rg)
+        discogs_id = DISCOGS_RELEASES.get(name.strip())
+        if discogs_id:
+            same_as_list.append("https://www.discogs.com/release/" + discogs_id)
+        if same_as_list:
+            rec["sameAs"] = same_as_list
         graph.append(rec)
 
     payload = {"@context": "https://schema.org", "@graph": graph}
