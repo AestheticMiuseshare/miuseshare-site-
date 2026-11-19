@@ -1,27 +1,19 @@
-## 简介 / About
+# Miuseshare
+> Miuseshare is an independent art creator focusing on artistic connotation and cultural heritage, presenting works across music, images and written reflections.
+> Miuseshare 是注重艺术内涵与文化底蕴的独立艺术创作者，作品涵盖音乐、图片与文字。
 
-Miuseshare，AestheticMiuseshare 审美体系下的音乐创作项目。
-以世界音乐为核心，融合各地民族音色，偏向氛围感、叙事感器乐作品。
-
-## 艺术网站 / Related Sites
-
+## 音乐 / Music
+### 发行平台 / Streaming
 - Spotify: https://open.spotify.com/artist/7vwb1kB95fV6RSojuJN516
 - Apple Music: https://music.apple.com/cn/artist/miuseshare/1896474705
 - Amazon Music: https://music.amazon.com/artists/B0GX6T9FCY/miuseshare
 - YouTube: https://youtube.com/channel/UC7-dcWv8guFznVXXn-ao3xw
 - SoundCloud: https://on.soundcloud.com/i8S7mP7Zw6oxQs3vo6
-- Tumblr: https://www.tumblr.com/miuseshare
-- Facebook: https://www.facebook.com/share/1K5rAQRpeL/
-- Pinterest: https://pin.it/5AInrhm2f
-- Huawei: https://url.cloud.huawei.com/CFQSfIHxLi
+- Huawei Music: https://url.cloud.huawei.com/CFQSfIHxLi
 - Discogs: https://www.discogs.com/artist/18539858-Miuseshare
-- Bluesky: https://bsky.app/profile/miuseshare.bsky.social
-- Wattpad: https://www.wattpad.com/user/Miuseshare
 - Mixcloud: https://www.mixcloud.com/Miuseshare/
-- Substack: https://substack.com/@miuseshare
 
-## 曲目 / Tracks
-
+### 曲目 / Tracks
 - Shackles | Miuseshare | world music, rap | https://song.link/s/0zRsSSJjkyZILkWoRnFoXs
 - Fragrant Shoulder Beauty | Miuseshare | world music, Lofi | https://song.link/s/6B044eLbIiTFBI5wdQqDGI
 - Wind in Your Ear | Miuseshare | world music, Pop | https://song.link/y/mEC4X383oyQ
@@ -33,7 +25,18 @@ Miuseshare，AestheticMiuseshare 审美体系下的音乐创作项目。
 - Chase the Wind by Moonlight | Miuseshare | world music,Ambient | https://song.link/s/1MwRM5FmNkM6oojQo7pLF5
 - Stellar Trip | Miuseshare | world music, Ambient | https://song.link/s/6GRMLZ18f0cMN57nSQTuQp
 
-## 页面清单 / Pages
+## 图片 / Images
+- Pinterest: https://pin.it/5AInrhm2f
 
+## 文字 / Writing
+- Wattpad: https://www.wattpad.com/user/Miuseshare
+- Substack: https://substack.com/@miuseshare
+
+## 社区 / Community
+- Bluesky: https://bsky.app/profile/miuseshare.bsky.social
+- Tumblr: https://www.tumblr.com/miuseshare
+- Facebook: https://www.facebook.com/share/1K5rAQRpeL/
+
+## 页面清单 / Pages
 - /pages/catalog.html 播放首页
 - /pages/songlist.html 完整歌曲目录
