@@ -1,5 +1,5 @@
 # Miuseshare
-> Miuseshare is an independent art creator focusing on artistic connotation and cultural heritage, presenting works across music, images and written reflections.
+> Miuseshare is an independent art creator focusing on artistic connotation and cultural depth, presenting works across music, images and written reflections.
 > Miuseshare 是注重艺术内涵与文化底蕴的独立艺术创作者，作品涵盖音乐、图片与文字。
 
 ## 音乐 / Music
