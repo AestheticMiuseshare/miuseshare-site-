@@ -13,7 +13,7 @@ LLMS = ROOT / "llms.txt"
 
 START = "<!-- ===== 爬虫文本 · 改歌只改这一块 ===== -->"
 END = "<!-- ===== 爬虫文本结束 ===== -->"
-TRACK_HEAD = "## 曲目 / Tracks"
+TRACK_HEAD = "### 曲目 / Tracks"
 LD_START = "<!-- ===== 结构化数据 · 自动生成 ===== -->"
 LD_END = "<!-- ===== 结构化数据结束 ===== -->"
 SITE = "https://aestheticmiuseshare.github.io/miuseshare-site-/"
@@ -31,7 +31,7 @@ SAME_AS = [
     "https://www.discogs.com/artist/18539858-Miuseshare",
 ]
 
-# 每首歌在 MusicBrainz 的发行组 ID
+# 每首歌在 MusicBrainz 的发行组 ID（新建后填这里；没有的就不用写）
 MB_GROUPS = {
     "Mere Passerby": "e0496bdf-2893-4583-b6f6-9c85cd57ff22",
     "Shackles": "d8719a71-d649-4b95-8dea-aad860a97dea",
@@ -69,7 +69,7 @@ DISCOGS_RELEASES = {
     "Stellar Trip": "39018122",
     "Mere Passerby": "39084480",
     "Summer Tide": "39084510",
-    "Starry Galaxy": "643c5898-5b65-4fd3-a8c9-c6f45bb9ac66",
+    "Starry Galaxy": "39084567",
     "Spring Streamlight": "39084582",
     "Wild Blackberry Thickets": "39084606",
     "Keep Steady": "39084627",
@@ -141,10 +141,17 @@ def sync_html(body: str) -> bool:
 def sync_jsonld(body: str) -> bool:
     page = HTML.read_text(encoding="utf-8")
     i = page.find(LD_START)
-    j = page.find(LD_END)
-    if i < 0 or j < 0 or j < i:
+    if i < 0:
         print("songlist.html 里找不到结构化数据标记，跳过")
         return False
+    j = page.find(LD_END, i)
+    if j < 0:
+        # 旧页缺结束标记：回退到 LD_START 后第一个 </script>，整体替换旧块
+        close = page.find("</script>", i)
+        if close < 0:
+            print("songlist.html 里找不到结构化数据标记，跳过")
+            return False
+        j = close + len("</script>")
 
     artist_id = SITE + "#miuseshare"
     graph = [{
@@ -184,9 +191,8 @@ def sync_jsonld(body: str) -> bool:
         + '\n<script type="application/ld+json" id="track-ld">'
         + json.dumps(payload, ensure_ascii=False, indent=2)
         + "</script>\n"
-        + LD_END
     )
-    new_page = page[:i] + block + page[j + len(LD_END):]
+    new_page = page[:i] + block + page[j:]
     if new_page == page:
         return False
     HTML.write_text(new_page, encoding="utf-8")
