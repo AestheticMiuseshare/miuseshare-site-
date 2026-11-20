@@ -31,8 +31,9 @@ SAME_AS = [
     "https://www.discogs.com/artist/18539858-Miuseshare",
 ]
 
-# 每首歌在 MusicBrainz 的发行组 ID（新建后填这里；没有的就不用写）
+# 每首歌在 MusicBrainz 的发行组 ID
 MB_GROUPS = {
+    "Mere Passerby": "e0496bdf-2893-4583-b6f6-9c85cd57ff22",
     "Shackles": "d8719a71-d649-4b95-8dea-aad860a97dea",
     "Fragrant Shoulder Beauty": "2488326c-318f-4478-8dd8-b5626b1ce1fd",
     "Wind in Your Ear": "d911f556-df0a-4b92-9002-e8bc93db7ed9",
@@ -43,6 +44,15 @@ MB_GROUPS = {
     "Soft Drift": "04630c4e-26e0-47f8-9cc4-5ffbee7fb2b2",
     "Chase the Wind by Moonlight": "4db7e8d6-8570-4d63-9718-1bcbc020be7d",
     "Stellar Trip": "4c6dad04-c983-4c91-9baf-ba0694087f0d",
+    "Summer Tide": "d953ff97-95a7-4e8c-9a4d-fcb9fc23cd54",
+    "Starry Galaxy": "643c5898-5b65-4fd3-a8c9-c6f45bb9ac66",
+    "Spring Streamlight": "514355c5-e250-4f02-9d4d-610938385b1d",
+    "Wild Blackberry Thickets": "bc988ee0-ca8d-4091-9533-c92f451ce45b",
+    "Keep Steady": "29932dfd-c6c5-44d1-8401-7d10d76cdd81",
+    "Memories of the Sandbar": "35ca7de2-0fc6-4a2f-bbfc-a03d4cfb5971",
+    "Old Pal": "65fbeb53-a4f8-4ed9-9d96-1a0b8e89ad44",
+    "False Crown": "af4c4069-3b89-41f9-b39d-d1ed9875ae2c",
+    "Far From Home": "5df11353-523f-47c7-a331-2fe11a9f13b3",
 }
 
 # Discogs Release ID 映射
@@ -57,6 +67,16 @@ DISCOGS_RELEASES = {
     "Soft Drift": "39018059",
     "Chase the Wind by Moonlight": "39018083",
     "Stellar Trip": "39018122",
+    "Mere Passerby": "39084480",
+    "Summer Tide": "39084510",
+    "Starry Galaxy": "643c5898-5b65-4fd3-a8c9-c6f45bb9ac66",
+    "Spring Streamlight": "39084582",
+    "Wild Blackberry Thickets": "39084606",
+    "Keep Steady": "39084627",
+    "Memories of the Sandbar": "39084648",
+    "Old Pal": "39084687",
+    "False Crown": "39084726",
+    "Far From Home": "39084747",
 }
 
 
