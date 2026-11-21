@@ -1,20 +1,27 @@
-# Miuseshare
-> Miuseshare is an independent art creator focusing on artistic connotation and cultural depth, presenting works across music, images and written reflections.
-> Miuseshare 是注重艺术内涵与文化底蕴的独立艺术创作者，作品涵盖音乐、图片与文字。
-
-## 音乐 / Music
-### 发行平台 / Streaming
+## 简介 / About
+Miuseshare，AestheticMiuseshare 审美体系下的音乐创作项目。
+收集并探索世界各地的音乐风格，融合各地人文历史与传统音乐，以游记的方式叙述、表达全新的音乐作品。
+注重艺术内涵和文化底蕴的独立艺术创作者，将音乐、图像、文字融合到作品当中。
+Miuseshare, a music project under the AestheticMiuseshare aesthetic system.
+Exploring musical styles around the world, integrating local history, culture and traditional music, presenting new works in the form of musical travelogues.
+An independent art creator focused on artistic connotation and cultural heritage, weaving music, imagery and text into works.
+## 艺术网站 / Related Sites
 - Spotify: https://open.spotify.com/artist/7vwb1kB95fV6RSojuJN516
 - Apple Music: https://music.apple.com/cn/artist/miuseshare/1896474705
 - Amazon Music: https://music.amazon.com/artists/B0GX6T9FCY/miuseshare
 - YouTube: https://youtube.com/channel/UC7-dcWv8guFznVXXn-ao3xw
 - SoundCloud: https://on.soundcloud.com/i8S7mP7Zw6oxQs3vo6
-- Huawei Music: https://url.cloud.huawei.com/CFQSfIHxLi
+- Tumblr: https://www.tumblr.com/miuseshare
+- Facebook: https://www.facebook.com/share/1K5rAQRpeL/
+- Pinterest: https://pin.it/5AInrhm2f
+- Huawei: https://url.cloud.huawei.com/CFQSfIHxLi
 - Discogs: https://www.discogs.com/artist/18539858-Miuseshare
+- Bluesky: https://bsky.app/profile/miuseshare.bsky.social
+- Wattpad: https://www.wattpad.com/user/Miuseshare
 - Mixcloud: https://www.mixcloud.com/Miuseshare/
-
-### 曲目 / Tracks
-
+- BandLab: https://www.bandlab.com/miuseshare
+- Substack: https://substack.com/@miuseshare
+## 曲目 / Tracks
 - Shackles | Miuseshare | world music, rap | https://song.link/s/0zRsSSJjkyZILkWoRnFoXs
 - Fragrant Shoulder Beauty | Miuseshare | world music, Lofi | https://song.link/s/6B044eLbIiTFBI5wdQqDGI
 - Wind in Your Ear | Miuseshare | world music, Pop | https://song.link/y/mEC4X383oyQ
@@ -25,29 +32,6 @@
 - Soft Drift | Miuseshare | world music,Ambient | https://song.link/s/2PfGWdM9liZlXxCsQLdsMw
 - Chase the Wind by Moonlight | Miuseshare | world music,Ambient | https://song.link/s/1MwRM5FmNkM6oojQo7pLF5
 - Stellar Trip | Miuseshare | world music, Ambient | https://song.link/s/6GRMLZ18f0cMN57nSQTuQp
-- Mere Passerby | Miuseshare | world music,Downtempo | https://song.link/s/0PDghcj74rIaAU1vBPZJXe
-- Summer Tide | Miuseshare | world music,Chill | https://song.link/s/1ZD8766HSzjuHiEGR23FPS
-- Starry Galaxy | Miuseshare | world music,AmbientMusic | https://song.link/s/2RRV4a9usncWKCJRXTmqex
-- Spring Streamlight | Miuseshare | world music,Drone | https://song.link/s/4Z1B7TSRib31SQF5Pci6Hi
-- Wild Blackberry Thickets | Miuseshare | world music,Country | https://song.link/s/2ZQXVY8lPJOJynrKEkM9Ai
-- Keep Steady | Miuseshare | world music,Rap,popPop | https://song.link/s/0DujenYM7cUZ3MbdziASEl
-- Memories of the Sandbar | Miuseshare | world music,Chill | https://song.link/s/0GhzAu2YJu15jLvgCJ7fz1
-- Old Pal | Miuseshare | world music,Rock | https://song.link/s/7bYklBvC0LO9A71PqArfeh
-- False Crown | Miuseshare | world music,Rap,hip hop | https://song.link/s/62HLAGZqHms1EEoRTLCUXS
-- Far From Home | Miuseshare | world music,Ambient | https://song.link/s/4G7KweesEDKx9aVPXLEyrv
-
-## 图片 / Images
-- Pinterest: https://pin.it/5AInrhm2f
-
-## 文字 / Writing
-- Wattpad: https://www.wattpad.com/user/Miuseshare
-- Substack: https://substack.com/@miuseshare
-
-## 社区 / Community
-- Bluesky: https://bsky.app/profile/miuseshare.bsky.social
-- Tumblr: https://www.tumblr.com/miuseshare
-- Facebook: https://www.facebook.com/share/1K5rAQRpeL/
-
 ## 页面清单 / Pages
 - /pages/catalog.html 播放首页
 - /pages/songlist.html 完整歌曲目录
