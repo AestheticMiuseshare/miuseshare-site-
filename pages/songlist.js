@@ -167,6 +167,7 @@ function render(text){
     }
     var imgDom = '';
     if(t.imgHtml){
+      // 图片HTML不转义，直接渲染
       imgDom = t.imgHtml.replace('<img ','<img class="track-img" ');
     }
     var enDom = t.enPoem ? '<div class="poem-en">'+esc(t.enPoem)+'</div>' : '';
@@ -193,11 +194,6 @@ function loadCatalog(){
   };
   xhr.onerror = function(){
     note.textContent = '曲目数据读取失败：网络请求异常（请确认 songscatalog.txt 与本页在同一目录）';
-  };
-  xhr.send();
-}
-loadCatalog();
-）';
   };
   xhr.send();
 }
