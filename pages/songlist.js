@@ -6,7 +6,7 @@ _css.textContent = '.track-block{margin-bottom:1.6rem;padding:1rem;border:1px so
 '.track-name{font-size:1rem;font-weight:bold}' +
 '.track-meta{font-size:.88rem;color:#555;margin:.4rem 0 .8rem}' +
 '.track-img{max-width:100%;border-radius:8px;margin-bottom:0.8rem}' +
-'.poem-en{font-size:0.92rem;color:#333;margin:0.4rem 0 0.2rem 0;font-style:italic}' +
+'.poem-en{font-size:0.92rem;color:#333;margin:0.4rem 0 0.2rem 0;font-family:system-ui,-apple-system,\'Segoe UI\',Roboto,sans-serif}' +
 '.poem-cn{font-size:0.92rem;color:#444;margin-bottom:0.8rem}' +
 '.play-btn{display:inline-block;padding:.4rem .8rem;background:#f4f4f4;border:1px solid #ccc;border-radius:8px;text-decoration:none;color:#222;font-size:.85rem}' +
 '.play-btn:active{background:#e9e9e9}' +
