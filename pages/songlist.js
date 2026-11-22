@@ -30,8 +30,7 @@ function splitTags(line){
   var out = [];
   var parts = line.split(/[,，]/);
   for(var i=0; i<parts.length; i++){
-    var p = parts[i];
-    var words = p.split(/#+/);
+    var words = parts[i].split(/#+/);
     for(var j=0; j<words.length; j++){
       var w = words[j].trim().replace(/[,，]+$/,'');
       if(w) out.push(w);
@@ -52,6 +51,7 @@ function parseBlock(lines){
   var tagLines = [];
   var ptr = 0;
 
+  // 固定顺序：第1行img，第2英文，第3中文
   if(lines.length>0 && lines[ptr].trim().substring(0,4) === '<img'){
     imgHtml = lines[ptr].trim();
     ptr++;
