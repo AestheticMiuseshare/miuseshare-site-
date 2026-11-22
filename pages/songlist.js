@@ -49,27 +49,19 @@ function parseBlock(lines){
   var enPoem = '';
   var cnPoem = '';
   var tagLines = [];
-  var ptr = 0;
-
-  // 固定顺序：第1行img，第2英文，第3中文
-  if(lines.length>0 && lines[ptr].trim().substring(0,4) === '<img'){
-    imgHtml = lines[ptr].trim();
-    ptr++;
-    if(lines[ptr]) enPoem = lines[ptr].trim();
-    ptr++;
-    if(lines[ptr]) cnPoem = lines[ptr].trim();
-    ptr++;
-  }
-
-  for(; ptr < lines.length; ptr++){
-    var raw = lines[ptr];
-    var t = raw.trim();
+  var prose = [];
+  for(var k=0; k<lines.length; k++){
+    var t = lines[k].trim();
     if(!t) continue;
     var m = t.match(/^#?\s*(single|album)\s*$/i);
     if(m){
       mode = m[1].toLowerCase();
       hasMarker = true;
       waitAlbum = (mode === 'album');
+      continue;
+    }
+    if(t.substring(0,4) === '<img'){
+      imgHtml = t;
       continue;
     }
     if(t.charAt(0) === '#'){
@@ -89,8 +81,15 @@ function parseBlock(lines){
       waitAlbum = false;
       continue;
     }
-    if(!info) info = t;
+    prose.push(t);
   }
+  var enLines = [];
+  var cnLines = [];
+  for(var p=0; p<prose.length; p++){
+    if(/[\u4e00-\u9fff]/.test(prose[p])){ cnLines.push(prose[p]); } else { enLines.push(prose[p]); }
+  }
+  enPoem = enLines.join(' ');
+  cnPoem = cnLines.join(' ');
 
   var body = stripIndex(info);
   var name = body;
@@ -111,12 +110,12 @@ function parseBlock(lines){
     genre = sp.slice(2).filter(Boolean).join(' ');
   }
   var tags = [];
-  for(var k=0;k<tagLines.length;k++){
-    tags = tags.concat(splitTags(tagLines[k]));
+  for(var q=0; q<tagLines.length; q++){
+    tags = tags.concat(splitTags(tagLines[q]));
   }
   var unique = [];
-  for(var t=0;t<tags.length;t++){
-    if(unique.indexOf(tags[t]) === -1) unique.push(tags[t]);
+  for(var r=0; r<tags.length; r++){
+    if(unique.indexOf(tags[r]) === -1) unique.push(tags[r]);
   }
   tags = unique;
   return {mode:mode, album:album, name:name, artist:artist, genre:genre, link:link, tags:tags, hasMarker:hasMarker, imgHtml:imgHtml, enPoem:enPoem, cnPoem:cnPoem};
@@ -185,7 +184,6 @@ function render(text){
 function loadCatalog(){
   var xhr = new XMLHttpRequest();
   xhr.open('GET', TXT_URL, true);
-  xhr.setRequestHeader('Cache-Control','no-cache');
   xhr.onload = function(){
     if(xhr.status >= 200 && xhr.status < 300){
       render(xhr.responseText);
@@ -195,6 +193,11 @@ function loadCatalog(){
   };
   xhr.onerror = function(){
     note.textContent = '曲目数据读取失败：网络请求异常（请确认 songscatalog.txt 与本页在同一目录）';
+  };
+  xhr.send();
+}
+loadCatalog();
+）';
   };
   xhr.send();
 }
