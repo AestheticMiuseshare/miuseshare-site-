@@ -181,35 +181,33 @@ function render(text){
     note.textContent = '曲目数据为空，请检查 songscatalog.txt';
   }
 }
-function loadCatalog(){
+function retryOrFail(attempt){
+  if(attempt < 2){
+    if(note) note.textContent = '加载中，正在重试…';
+    setTimeout(function(){ loadCatalog(attempt + 1); }, 1500);
+  }else{
+    if(note) note.textContent = '曲目数据多次读取失败，请刷新页面重试';
+  }
+}
+function loadCatalog(attempt){
+  attempt = attempt || 0;
   var xhr = new XMLHttpRequest();
   xhr.open('GET', TXT_URL, true);
+  xhr.timeout = 8000;
+  xhr.overrideMimeType('text/plain; charset=utf-8');
   xhr.onload = function(){
     if(xhr.status >= 200 && xhr.status < 300){
       render(xhr.responseText);
     }else{
-      note.textContent = '曲目数据读取失败：HTTP ' + xhr.status;
+      retryOrFail(attempt);
     }
   };
-  xhr.onerror = function(){
-    note.textContent = '曲目数据读取失败：网络请求异常（请确认 songscatalog.txt 与本页在同一目录）';
-  };
+  xhr.onerror = function(){ retryOrFail(attempt); };
+  xhr.ontimeout = function(){ retryOrFail(attempt); };
   xhr.send();
 }
 loadCatalog();
-ock);
-    }
-    if(note) note.textContent = '';
-  }catch(e){
-    if(note) note.textContent = '解析出错：' + e.message;
-    console.error(e);
-  }
-}
-function loadCatalog(){
-  try{
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', TXT_URL, true);
-    xhr.overrideMimeType('text/plain; charset=utf-8');
+in; charset=utf-8');
     xhr.onload = function(){
       if(xhr.status >= 200 && xhr.status < 300){
         render(xhr.responseText);
