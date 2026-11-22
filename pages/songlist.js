@@ -48,9 +48,19 @@ function parseBlock(lines){
   let enPoem = '';
   let cnPoem = '';
   const tagLines = [];
+  let ptr = 0;
 
-  const prose = [];
-  for(const raw of lines){
+  if(lines.length>0 && lines[ptr].trim().startsWith('<img')){
+    imgHtml = lines[ptr].trim();
+    ptr++;
+    if(lines[ptr]) enPoem = lines[ptr].trim();
+    ptr++;
+    if(lines[ptr]) cnPoem = lines[ptr].trim();
+    ptr++;
+  }
+
+  for(; ptr < lines.length; ptr++){
+    const raw = lines[ptr];
     const t = raw.trim();
     if(!t) continue;
     const m = t.match(/^#?\s*(single|album)\s*$/i);
@@ -58,10 +68,6 @@ function parseBlock(lines){
       mode = m[1].toLowerCase();
       hasMarker = true;
       waitAlbum = (mode === 'album');
-      continue;
-    }
-    if(t.startsWith('<img')){
-      imgHtml = t;
       continue;
     }
     if(t.startsWith('#')){
@@ -81,15 +87,8 @@ function parseBlock(lines){
       waitAlbum = false;
       continue;
     }
-    prose.push(t);
+    if(!info) info = t;
   }
-  const enLines = [];
-  const cnLines = [];
-  for(const p of prose){
-    if(/[\u4e00-\u9fff]/.test(p)){ cnLines.push(p); } else { enLines.push(p); }
-  }
-  enPoem = enLines.join(' ');
-  cnPoem = cnLines.join(' ');
 
   let body = stripIndex(info);
   let name = body;
@@ -194,6 +193,4 @@ fetch(TXT_URL, {cache:'no-cache'})
   .then(render)
   .catch(err => {
     note.textContent = '曲目数据读取失败：' + err.message + '（请确认 songscatalog.txt 与本页在同一目录）';
-  });
-同一目录）';
   });
