@@ -163,6 +163,7 @@ function render(text){
       if(t.imgSrc){
         var img = document.createElement('img');
         img.className = 'track-img';
+        img.loading = 'lazy';
         img.src = t.imgSrc;
         img.alt = '';
         block.appendChild(img);
