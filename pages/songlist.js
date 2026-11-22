@@ -5,20 +5,21 @@ _css.textContent=`.track-block{margin-bottom:1.6rem;padding:1rem;border:1px soli
 .track-index{font-size:1rem;color:#222;font-weight:normal;margin-right:.25rem}
 .track-name{font-size:1rem;font-weight:bold}
 .track-meta{font-size:.88rem;color:#555;margin:.4rem 0 .8rem}
+.track-img{max-width:100%;border-radius:8px;margin-bottom:0.8rem}
+.poem-en{font-size:0.92rem;color:#333;margin:0.4rem 0 0.2rem 0;font-style:italic}
+.poem-cn{font-size:0.92rem;color:#444;margin-bottom:0.8rem}
 .play-btn{display:inline-block;padding:.4rem .8rem;background:#f4f4f4;border:1px solid #ccc;border-radius:8px;text-decoration:none;color:#222;font-size:.85rem}
 .play-btn:active{background:#e9e9e9}
 .tag-group{margin-top:.8rem}
 .tag-item{display:inline-block;border:1px solid #777;border-radius:999px;padding:.22rem .6rem;margin:.2rem .15rem;color:#222;font-size:.8rem}
 .load-note{font-size:.85rem;color:#777;margin:1rem 0}`;
 document.head.appendChild(_css);
-
 const wrap = document.querySelector('#wrap');
 const note = document.querySelector('#note');
 const TXT_URL = './songscatalog.txt';
-
 function esc(s){
   return String(s == null ? '' : s)
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace( />/g,'&gt;')
     .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
 function stripIndex(s){
@@ -36,7 +37,6 @@ function splitTags(line){
   }
   return out;
 }
-
 function parseBlock(lines){
   let mode = 'single';
   let album = '';
@@ -44,12 +44,26 @@ function parseBlock(lines){
   let hasMarker = false;
   let info = '';
   let link = '';
+  let imgHtml = '';
+  let enPoem = '';
+  let cnPoem = '';
   const tagLines = [];
 
-  for(const raw of lines){
+  let ptr = 0;
+  // 块开头如果是img标签
+  if(lines.length>0 && lines[ptr].trim().startsWith('<img')){
+      imgHtml = lines[ptr].trim();
+      ptr++;
+      if(lines[ptr]) enPoem = lines[ptr].trim();
+      ptr++;
+      if(lines[ptr]) cnPoem = lines[ptr].trim();
+      ptr++;
+  }
+
+  for(; ptr < lines.length; ptr++){
+    const raw = lines[ptr];
     const t = raw.trim();
     if(!t) continue;
-
     const m = t.match(/^#\s*(single|album)\s*$/i);
     if(m){
       mode = m[1].toLowerCase();
@@ -95,33 +109,27 @@ function parseBlock(lines){
     artist = sp[1] || '';
     genre = sp.slice(2).filter(Boolean).join(' ');
   }
-
   let tags = [];
   for(const line of tagLines){
     tags = tags.concat(splitTags(line));
   }
   tags = [...new Set(tags)];
-
-  return {mode, album, name, artist, genre, link, tags, hasMarker};
+  return {mode, album, name, artist, genre, link, tags, hasMarker, imgHtml, enPoem, cnPoem};
 }
-
 function groupTitle(track){
   if(track.mode === 'album'){
     return track.album ? track.album : 'Album 专辑';
   }
   return 'Single 单曲';
 }
-
 function render(text){
   const blocks = text
     .replace(/\r/g,'')
     .split(/\n{2,}/)
     .map(b => b.split('\n').filter(l => l.trim() !== ''))
     .filter(b => b.length);
-
   let carryMode = 'single';
   let carryAlbum = '';
-
   const tracks = blocks
     .map(parseBlock)
     .map(t => {
@@ -135,10 +143,8 @@ function render(text){
       return t;
     })
     .filter(t => t.name || t.link);
-
   let html = '';
   let lastKey = null;
-
   for(let ti = 0; ti < tracks.length; ti++){
     const t = tracks[ti];
     const key = t.mode + '|' + t.album;
@@ -147,19 +153,27 @@ function render(text){
       html += `<div class="${cls}">${esc(groupTitle(t))}</div>`;
       lastKey = key;
     }
-
     let tagHtml = '';
     for(const tag of t.tags){
       tagHtml += `<span class="tag-item">${esc(tag)}</span>`;
     }
-
     const meta = [t.artist, t.genre].filter(Boolean).join(' ｜ ');
     const linkHtml = t.link
       ? `<a class="play-btn" href="${esc(t.link)}" target="_blank" rel="noopener noreferrer">Play</a>`
       : '';
 
+    let imgDom = '';
+    if(t.imgHtml){
+        imgDom = t.imgHtml.replace('<img ','<img class="track-img" ');
+    }
+    let enDom = t.enPoem ? `<div class="poem-en">${esc(t.enPoem)}</div>` : '';
+    let cnDom = t.cnPoem ? `<div class="poem-cn">${esc(t.cnPoem)}</div>` : '';
+
     html += `
 <div class="track-block">
+  ${imgDom}
+  ${enDom}
+  ${cnDom}
   <div class="track-name"><span class="track-index">${ti + 1}.</span> ${esc(t.name)}</div>
   <div class="track-meta">${esc(meta)}</div>
   ${linkHtml}
@@ -167,13 +181,11 @@ function render(text){
 </div>
 `;
   }
-
   wrap.innerHTML = html;
   if(!tracks.length){
     note.textContent = '曲目数据为空，请检查 songscatalog.txt';
   }
 }
-
 fetch(TXT_URL, {cache:'no-cache'})
   .then(r => {
     if(!r.ok) throw new Error('HTTP ' + r.status);
