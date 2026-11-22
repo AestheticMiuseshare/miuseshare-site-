@@ -18,11 +18,6 @@ var wrap = document.querySelector('#wrap');
 var note = document.querySelector('#note');
 var TXT_URL = './songscatalog.txt';
 
-function esc(s){
-  s = String(s == null ? '' : s);
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-  .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-}
 function stripIndex(s){
   return s.replace(/^\s*\d+\s*[.、)）]\s*/,'').trim();
 }
@@ -45,7 +40,7 @@ function parseBlock(lines){
   var hasMarker = false;
   var info = '';
   var link = '';
-  var imgHtml = '';
+  var imgSrc = '';
   var enPoem = '';
   var cnPoem = '';
   var tagLines = [];
@@ -61,7 +56,8 @@ function parseBlock(lines){
       continue;
     }
     if(t.substring(0,4) === '<img'){
-      imgHtml = t;
+      var srcMatch = t.match(/src="([^"]+)"/);
+      if(srcMatch) imgSrc = srcMatch[1];
       continue;
     }
     if(t.charAt(0) === '#'){
@@ -118,83 +114,124 @@ function parseBlock(lines){
     if(unique.indexOf(tags[r]) === -1) unique.push(tags[r]);
   }
   tags = unique;
-  return {mode:mode, album:album, name:name, artist:artist, genre:genre, link:link, tags:tags, hasMarker:hasMarker, imgHtml:imgHtml, enPoem:enPoem, cnPoem:cnPoem};
+  return {mode:mode, album:album, name:name, artist:artist, genre:genre, link:link, tags:tags, hasMarker:hasMarker, imgSrc:imgSrc, enPoem:enPoem, cnPoem:cnPoem};
 }
 function groupTitle(track){
   if(track.mode === 'album'){
     return track.album ? track.album : 'Album 专辑';
   }
-  return 'Single 单曲';
+  return 'Single';
 }
 function render(text){
-  var blocks = text
-    .replace(/\r/g,'')
-    .split(/\n{2,}/)
-    .map(function(b){
-      return b.split('\n').filter(function(l){return l.trim() !== '';});
-    })
-    .filter(function(b){return b.length;});
-  var carryMode = 'single';
-  var carryAlbum = '';
-  var tracks = blocks.map(parseBlock).map(function(t){
-    if(t.hasMarker){
-      carryMode = t.mode;
-      carryAlbum = t.album;
-    }else{
-      t.mode = carryMode;
-      t.album = carryAlbum;
+  try{
+    wrap.innerHTML = '';
+    var blocks = text
+      .replace(/\r/g,'')
+      .split(/\n{2,}/)
+      .map(function(b){
+        return b.split('\n').filter(function(l){return l.trim() !== '';});
+      })
+      .filter(function(b){return b.length;});
+    var carryMode = 'single';
+    var carryAlbum = '';
+    var tracks = blocks.map(parseBlock).map(function(t){
+      if(t.hasMarker){
+        carryMode = t.mode;
+        carryAlbum = t.album;
+      }else{
+        t.mode = carryMode;
+        t.album = carryAlbum;
+      }
+      return t;
+    }).filter(function(t){return t.name || t.link;});
+
+    var lastKey = null;
+    for(var ti = 0; ti < tracks.length; ti++){
+      var t = tracks[ti];
+      var key = t.mode + '|' + t.album;
+      if(key !== lastKey){
+        var groupDiv = document.createElement('div');
+        groupDiv.className = (t.mode === 'album') ? 'group-title-album' : 'group-title-single';
+        groupDiv.textContent = groupTitle(t);
+        wrap.appendChild(groupDiv);
+        lastKey = key;
+      }
+      var block = document.createElement('div');
+      block.className = 'track-block';
+
+      if(t.imgSrc){
+        var img = document.createElement('img');
+        img.className = 'track-img';
+        img.src = t.imgSrc;
+        img.alt = '';
+        block.appendChild(img);
+      }
+      if(t.enPoem){
+        var pEn = document.createElement('div');
+        pEn.className = 'poem-en';
+        pEn.textContent = t.enPoem;
+        block.appendChild(pEn);
+      }
+      if(t.cnPoem){
+        var pCn = document.createElement('div');
+        pCn.className = 'poem-cn';
+        pCn.textContent = t.cnPoem;
+        block.appendChild(pCn);
+      }
+      var nameDiv = document.createElement('div');
+      nameDiv.className = 'track-name';
+      nameDiv.textContent = (ti+1)+'. '+t.name;
+      block.appendChild(nameDiv);
+
+      var metaDiv = document.createElement('div');
+      metaDiv.className = 'track-meta';
+      metaDiv.textContent = t.artist + ' | ' + t.genre;
+      block.appendChild(metaDiv);
+
+      if(t.link){
+        var a = document.createElement('a');
+        a.className = 'play-btn';
+        a.href = t.link;
+        a.target = '_blank';
+        a.textContent = 'Play';
+        block.appendChild(a);
+      }
+      var tagWrap = document.createElement('div');
+      tagWrap.className = 'tag-group';
+      for(var s=0; s<t.tags.length; s++){
+        var span = document.createElement('span');
+        span.className = 'tag-item';
+        span.textContent = t.tags[s];
+        tagWrap.appendChild(span);
+      }
+      block.appendChild(tagWrap);
+      wrap.appendChild(block);
     }
-    return t;
-  }).filter(function(t){return t.name || t.link;});
-  var html = '';
-  var lastKey = null;
-  for(var ti = 0; ti < tracks.length; ti++){
-    var t = tracks[ti];
-    var key = t.mode + '|' + t.album;
-    if(key !== lastKey){
-      var cls = (t.mode === 'album') ? 'group-title-album' : 'group-title-single';
-      html += '<div class="'+cls+'">'+esc(groupTitle(t))+'</div>';
-      lastKey = key;
-    }
-    var tagHtml = '';
-    for(var s=0; s<t.tags.length; s++){
-      tagHtml += '<span class="tag-item">'+esc(t.tags[s])+'</span>';
-    }
-    var meta = [t.artist, t.genre].filter(Boolean).join(' ｜ ');
-    var linkHtml = '';
-    if(t.link){
-      linkHtml = '<a class="play-btn" href="'+esc(t.link)+'" target="_blank" rel="noopener noreferrer">Play</a>';
-    }
-    var imgDom = '';
-    if(t.imgHtml){
-      // 图片HTML不转义，直接渲染
-      imgDom = t.imgHtml.replace('<img ','<img class="track-img" ');
-    }
-    var enDom = t.enPoem ? '<div class="poem-en">'+esc(t.enPoem)+'</div>' : '';
-    var cnDom = t.cnPoem ? '<div class="poem-cn">'+esc(t.cnPoem)+'</div>' : '';
-    html += '<div class="track-block">'+imgDom+enDom+cnDom+
-    '<div class="track-name"><span class="track-index">'+(ti+1)+'.</span> '+esc(t.name)+'</div>'+
-    '<div class="track-meta">'+esc(meta)+'</div>'+linkHtml+
-    '<div class="tag-group">'+tagHtml+'</div></div>';
-  }
-  wrap.innerHTML = html;
-  if(!tracks.length){
-    note.textContent = '曲目数据为空，请检查 songscatalog.txt';
+    if(note) note.textContent = '';
+  }catch(e){
+    if(note) note.textContent = '解析出错：' + e.message;
+    console.error(e);
   }
 }
 function loadCatalog(){
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', TXT_URL, true);
-  xhr.onload = function(){
-    if(xhr.status >= 200 && xhr.status < 300){
-      render(xhr.responseText);
-    }else{
-      note.textContent = '曲目数据读取失败：HTTP ' + xhr.status;
-    }
-  };
-  xhr.onerror = function(){
-    note.textContent = '曲目数据读取失败：网络请求异常（请确认 songscatalog.txt 与本页在同一目录）';
-  };
-  xhr.send();
+  try{
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', TXT_URL, true);
+    xhr.overrideMimeType('text/plain; charset=utf-8');
+    xhr.onload = function(){
+      if(xhr.status >= 200 && xhr.status < 300){
+        render(xhr.responseText);
+      }else{
+        if(note) note.textContent = '读取txt失败，HTTP状态：'+xhr.status;
+      }
+    };
+    xhr.onerror = function(){
+      if(note) note.textContent = '网络读取失败，检查songscatalog.txt路径';
+    };
+    xhr.send();
+  }catch(e){
+    if(note) note.textContent = '请求异常：'+e.message;
+    console.error(e);
+  }
 }
 loadCatalog();
