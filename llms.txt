@@ -45,6 +45,10 @@ An independent art creator focused on artistic connotation and cultural heritage
 - Old Pal | Miuseshare | world music, Rock | https://song.link/s/7bYklBvC0LO9A71PqArfeh
 - False Crown | Miuseshare | world music, Rap, hip hop | https://song.link/s/62HLAGZqHms1EEoRTLCUXS
 - Far From Home | Miuseshare | world music, Ambient | https://song.link/s/4G7KweesEDKx9aVPXLEyrv
+- Hallowed Ground | Miuseshare | FusionMusic ,NarrativeFolk ,AtmosphericWorld ,ArtMusic
+- Snow Ballad | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic
+- Oath of the Cold Stars | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic
+- Midnight Sun | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic
 
 ## 页面清单 / Pages
 - /pages/catalog.html 播放首页
