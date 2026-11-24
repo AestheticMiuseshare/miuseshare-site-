@@ -15,8 +15,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Run update-songlist script
-        run: python scripts/update-songlist.py
+      - name: Run sync script
+        run: python scripts/updatesonglist.py
       - name: Commit & push changes
         run: |
           git config --global user.name "AestheticMiuseshare"
