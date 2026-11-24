@@ -1,35 +1,26 @@
-name: sync songlist
-
+name: Sync Track Catalog
 on:
   push:
-    branches: [main]
     paths:
       - 'pages/songscatalog.txt'
-      - '.github/workflows/sync.yml'
-      - 'scripts/update-songlist.py'
-  workflow_dispatch:
-
-permissions:
-  contents: write
-
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: 把 txt 原文写入 songlist.html 与 llms.txt
-        run: python3 scripts/update-songlist.py
-
-      - name: 有变化就提交
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run update-songlist script
+        run: python scripts/update-songlist.py
+      - name: Commit & push changes
         run: |
-          if [ -z "$(git status --porcelain)" ]; then
-            echo "无变化"
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add pages/songlist.html llms.txt
-          git commit -m "chore: sync crawl text from songscatalog.txt [skip ci]"
+          git config --global user.name "AestheticMiuseshare"
+          git config --global user.email "AestheticMiuseshare@users.noreply.github.com"
+          git add llms.txt pages/songlist.html
+          git commit -m "Auto sync: refresh llms.txt and songlist.html"
           git push
- 
