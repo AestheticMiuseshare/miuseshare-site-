@@ -4,7 +4,7 @@ _css.textContent = '.track-block{margin-bottom:1.6rem;padding:1rem;border:1px so
 '.group-title-album{font-size:1.3rem;font-weight:bold;margin:2.2rem 0 1rem;color:#1a1a1a;border-bottom:1px solid #cccccc;padding-bottom:.4rem}' +
 '.track-index{font-size:1rem;color:#222;font-weight:normal;margin-right:.25rem}' +
 '.track-name{font-size:1rem;font-weight:bold}' +
-'.track-meta{font-size:.88rem;color:#555;margin:.4rem 0 .8rem;word-break:break-all;}' +
+'.track-meta{font-size:.88rem;color:#555;margin:.4rem 0 .8rem;word-break:break-word;overflow-wrap:anywhere;line-height:1.5}' +
 '.track-img{max-width:100%;border-radius:8px;margin-bottom:0.8rem}' +
 '.poem-en{font-size:0.92rem;color:#333;margin:0.4rem 0 0.2rem 0;font-family:system-ui,-apple-system,\'Segoe UI\',Roboto,sans-serif}' +
 '.poem-cn{font-size:0.92rem;color:#444;margin-bottom:0.8rem}' +
@@ -18,6 +18,7 @@ var wrap = document.querySelector('#wrap');
 var note = document.querySelector('#note');
 var TXT_URL = './songscatalog.txt';
 var FETCH_TIMEOUT = 12000;
+
 function stripIndex(s){
   return s.replace(/^\s*\d+\s*[.、)）]\s*/,'').trim();
 }
@@ -45,18 +46,17 @@ function parseBlock(lines){
   var cnPoem = '';
   var tagLines = [];
   var prose = [];
-  var startK = 0;
-
-  if(lines.length>0 && lines[0].trim().startsWith("Album:")){
-    mode = 'album';
-    hasMarker = true;
-    album = lines[0].trim().replace(/^Album:\s*/,"");
-    startK = 1;
-  }
-
-  for(var k=startK; k<lines.length; k++){
+  for(var k=0; k<lines.length; k++){
     var t = lines[k].trim();
     if(!t) continue;
+    var amLine = t.match(/^#?\s*album\s*[:：]\s*(.+)$/i);
+    if(amLine){
+      mode = 'album';
+      hasMarker = true;
+      album = amLine[1].trim();
+      waitAlbum = false;
+      continue;
+    }
     var m = t.match(/^#?\s*(single|album)\s*$/i);
     if(m){
       mode = m[1].toLowerCase();
@@ -88,7 +88,6 @@ function parseBlock(lines){
     }
     prose.push(t);
   }
-
   var enLines = [];
   var cnLines = [];
   for(var p=0; p<prose.length; p++){
@@ -96,6 +95,7 @@ function parseBlock(lines){
   }
   enPoem = enLines.join(' ');
   cnPoem = cnLines.join(' ');
+
   var body = stripIndex(info);
   var name = body;
   var artist = '';
@@ -127,7 +127,7 @@ function parseBlock(lines){
 }
 function groupTitle(track){
   if(track.mode === 'album'){
-    return track.album ? track.album : 'Album 专辑';
+    return track.album ? 'Album: ' + track.album : 'Album 专辑';
   }
   return 'Single';
 }
@@ -141,16 +141,15 @@ function render(text){
         return b.split('\n').filter(function(l){return l.trim() !== '';});
       })
       .filter(function(b){return b.length;});
-
     var carryMode = 'single';
     var carryAlbum = '';
     var tracks = blocks.map(parseBlock).map(function(t){
-      if(!t.hasMarker){
-        t.mode = carryMode;
-        t.album = carryAlbum;
-      }else{
+      if(t.hasMarker){
         carryMode = t.mode;
         carryAlbum = t.album;
+      }else{
+        t.mode = carryMode;
+        t.album = carryAlbum;
       }
       return t;
     }).filter(function(t){return t.name || t.link;});
@@ -168,6 +167,7 @@ function render(text){
       }
       var block = document.createElement('div');
       block.className = 'track-block';
+
       if(t.imgSrc){
         var img = document.createElement('img');
         img.className = 'track-img';
@@ -192,13 +192,12 @@ function render(text){
       nameDiv.className = 'track-name';
       nameDiv.textContent = (ti+1)+'. '+t.name;
       block.appendChild(nameDiv);
+
       var metaDiv = document.createElement('div');
       metaDiv.className = 'track-meta';
-      var metaParts = [];
-      if (t.artist) metaParts.push(t.artist);
-      if (t.genre) metaParts.push(t.genre);
-      metaDiv.textContent = metaParts.join(' | ');
+      metaDiv.textContent = t.artist + ' | ' + t.genre;
       block.appendChild(metaDiv);
+
       if(t.link){
         var a = document.createElement('a');
         a.className = 'play-btn';
