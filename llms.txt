@@ -50,6 +50,11 @@ An independent art creator focused on artistic connotation and cultural heritage
 - Snow Ballad | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic
 - Oath of the Cold Stars | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic
 - Midnight Sun | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic
+- Forest Awakening | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic
+- Stream Quest | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic
+- Mulan Lake | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic
+- Lingering by Mulan Lake | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic
+- Whispers of Nature | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic
 
 ## 页面清单 / Pages
 - /pages/catalog.html 播放首页
