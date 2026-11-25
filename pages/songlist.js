@@ -45,16 +45,18 @@ function parseBlock(lines){
   var cnPoem = '';
   var tagLines = [];
   var prose = [];
+  var startK = 0;
 
-  // 新增：识别 Album:xxx 格式头部
+  // 兼容编辑器输出 Album:xxx 格式，不修改原lines数组！只用下标偏移
   if(lines.length>0 && lines[0].trim().startsWith("Album:")){
     mode = 'album';
     hasMarker = true;
     album = lines[0].trim().replace(/^Album:\s*/,"");
-    lines.shift();
+    startK = 1; // 从第1行开始循环，跳过第0行的Album:xxx
   }
 
-  for(var k=0; k<lines.length; k++){
+  // 使用startK作为起始下标，原数组不动！修复shift导致跳过行的bug
+  for(var k=startK; k<lines.length; k++){
     var t = lines[k].trim();
     if(!t) continue;
     var m = t.match(/^#?\s*(single|album)\s*$/i);
