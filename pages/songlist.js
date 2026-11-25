@@ -47,15 +47,14 @@ function parseBlock(lines){
   var prose = [];
   var startK = 0;
 
-  // 兼容编辑器输出 Album:xxx 格式，不修改原lines数组！只用下标偏移
+  //支持每块独立 Album:xxx 头部，每首歌块自己携带专辑信息
   if(lines.length>0 && lines[0].trim().startsWith("Album:")){
     mode = 'album';
     hasMarker = true;
     album = lines[0].trim().replace(/^Album:\s*/,"");
-    startK = 1; // 从第1行开始循环，跳过第0行的Album:xxx
+    startK = 1;
   }
 
-  // 使用startK作为起始下标，原数组不动！修复shift导致跳过行的bug
   for(var k=startK; k<lines.length; k++){
     var t = lines[k].trim();
     if(!t) continue;
@@ -90,6 +89,7 @@ function parseBlock(lines){
     }
     prose.push(t);
   }
+
   var enLines = [];
   var cnLines = [];
   for(var p=0; p<prose.length; p++){
@@ -142,18 +142,21 @@ function render(text){
         return b.split('\n').filter(function(l){return l.trim() !== '';});
       })
       .filter(function(b){return b.length;});
+
     var carryMode = 'single';
     var carryAlbum = '';
     var tracks = blocks.map(parseBlock).map(function(t){
-      if(t.hasMarker){
-        carryMode = t.mode;
-        carryAlbum = t.album;
-      }else{
+      //本块自己有标记，优先用本块，不继承；没有标记才继承全局carry
+      if(!t.hasMarker){
         t.mode = carryMode;
         t.album = carryAlbum;
+      }else{
+        carryMode = t.mode;
+        carryAlbum = t.album;
       }
       return t;
     }).filter(function(t){return t.name || t.link;});
+
     var lastKey = null;
     for(var ti = 0; ti < tracks.length; ti++){
       var t = tracks[ti];
@@ -195,6 +198,7 @@ function render(text){
       metaDiv.className = 'track-meta';
       metaDiv.textContent = t.artist + ' | ' + t.genre;
       block.appendChild(metaDiv);
+      //只要link有内容，不管专辑还是单曲，直接出Play按钮
       if(t.link){
         var a = document.createElement('a');
         a.className = 'play-btn';
