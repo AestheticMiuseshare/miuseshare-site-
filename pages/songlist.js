@@ -12,7 +12,34 @@ _css.textContent = '.track-block{margin-bottom:1.6rem;padding:1rem;border:1px so
 '.play-btn:active{background:#e9e9e9}' +
 '.tag-group{margin-top:.8rem}' +
 '.tag-item{display:inline-block;border:1px solid #777;border-radius:999px;padding:.22rem .6rem;margin:.2rem .15rem;color:#222;font-size:.8rem}' +
-'.load-note{font-size:.85rem;color:#777;margin:1rem 0}';
+'.load-note{font-size:.85rem;color:#777;margin:1rem 0}' +
+'.track-block{scroll-margin-top:16px}' +
+'.side-nav{position:fixed;right:22px;top:50%;transform:translateY(-50%);width:176px;max-height:68vh;display:flex;flex-direction:column;background:rgba(255,255,255,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid #e5e7eb;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.07);z-index:60;overflow:hidden}' +
+'.side-nav__head{display:flex;align-items:center;justify-content:space-between;padding:10px 12px 6px;font-size:.72rem;letter-spacing:.08em;color:#888}' +
+'.side-nav__close{display:none;background:none;border:none;color:#888;font-size:1.1rem;line-height:1;cursor:pointer;padding:0 2px}' +
+'.side-nav__list{flex:1;overflow-y:auto;padding:4px 8px 8px;scrollbar-width:thin}' +
+'.side-nav__group{font-size:.7rem;color:#999;margin:8px 4px 4px;letter-spacing:.04em}' +
+'.side-nav__item{display:flex;align-items:center;gap:.45rem;width:100%;background:none;border:none;text-align:left;font-size:.78rem;color:#555;padding:.32rem .45rem;border-radius:8px;cursor:pointer;white-space:nowrap;overflow:hidden}' +
+'.side-nav__item:hover{background:#f4f5f7}' +
+'.side-nav__item.active{color:#1a1a1a;font-weight:600;background:#f1f2f4}' +
+'.side-nav__num{flex:0 0 1.9rem;font-variant-numeric:tabular-nums;color:#999}' +
+'.side-nav__item.active .side-nav__num{color:#1a1a1a}' +
+'.side-nav__label{overflow:hidden;text-overflow:ellipsis}' +
+'.side-nav__foot{padding:8px 12px;border-top:1px solid #eee;display:flex;justify-content:space-between;align-items:center;gap:.5rem}' +
+'.side-nav__progress{font-size:.72rem;color:#888;font-variant-numeric:tabular-nums}' +
+'.side-nav__top{background:#f4f4f4;border:1px solid #ddd;border-radius:8px;color:#333;font-size:.78rem;padding:.3rem .6rem;cursor:pointer}' +
+'.nav-fab{position:fixed;right:16px;bottom:88px;z-index:59;width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid #e5e7eb;box-shadow:0 6px 18px rgba(0,0,0,.1);display:none;align-items:center;justify-content:center;cursor:pointer;color:#333;font-size:1rem}' +
+'.nav-fab svg{width:20px;height:20px;display:block;transition:color .18s ease,transform .18s ease}' +
+'.nav-fab:hover{color:#1a1a1a}' +
+'.nav-fab:hover svg{transform:rotate(-6deg)}' +
+'.nav-topfab{position:fixed;right:16px;bottom:136px;z-index:59;width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid #e5e7eb;box-shadow:0 6px 18px rgba(0,0,0,.1);display:none;align-items:center;justify-content:center;cursor:pointer;color:#333;font-size:1rem}' +
+'@media (max-width:900px){' +
+'.side-nav{right:0;top:0;transform:none;width:230px;max-height:100vh;border-radius:14px 0 0 14px;translate:110% 0;transition:translate .25s ease}' +
+'.side-nav.open{translate:0 0}' +
+'.side-nav__close{display:block}' +
+'.nav-fab{display:flex}' +
+'.nav-topfab.show{display:flex}' +
+'}';
 document.head.appendChild(_css);
 var wrap = document.querySelector('#wrap');
 var note = document.querySelector('#note');
@@ -218,6 +245,7 @@ function render(text){
       wrap.appendChild(block);
     }
     if(note) note.textContent = '';
+    buildNav();
   }catch(e){
     if(note) note.textContent = '解析出错：' + e.message;
     console.error(e);
@@ -252,3 +280,155 @@ function loadCatalog(){
   }
 }
 loadCatalog();
+
+/* ===== 右侧曲目索引导航（目录 + 进度 + 回顶） ===== */
+var navItems = [];
+var navList = null;
+var navProg = null;
+var navTopFab = null;
+var navBuilt = false;
+
+function buildNav(){
+  var old = document.querySelector('.side-nav');
+  if(old) old.parentNode.removeChild(old);
+  var oldFab = document.querySelector('.nav-fab');
+  if(oldFab) oldFab.parentNode.removeChild(oldFab);
+  var oldTop = document.querySelector('.nav-topfab');
+  if(oldTop) oldTop.parentNode.removeChild(oldTop);
+
+  var nodes = wrap.children;
+  var entries = [];
+  var idx = 0;
+  for(var i=0;i<nodes.length;i++){
+    var el = nodes[i];
+    if(el.classList && el.classList.contains('track-block')){
+      idx++;
+      var nameEl = el.querySelector('.track-name');
+      var label = nameEl ? nameEl.textContent : ('Track '+idx);
+      el.id = 'track-' + idx;
+      entries.push({type:'track', label:label, el:el, num:idx});
+    }else if(el.classList && (el.classList.contains('group-title-single') || el.classList.contains('group-title-album'))){
+      entries.push({type:'group', label:el.textContent, el:el});
+    }
+  }
+  if(!entries.length) return;
+
+  var nav = document.createElement('nav');
+  nav.className = 'side-nav';
+  nav.setAttribute('aria-label','曲目目录导航');
+
+  var head = document.createElement('div');
+  head.className = 'side-nav__head';
+  var headTitle = document.createElement('span');
+  headTitle.textContent = '目录 · ' + idx;
+  var closeBtn = document.createElement('button');
+  closeBtn.className = 'side-nav__close';
+  closeBtn.setAttribute('aria-label','关闭目录');
+  closeBtn.textContent = '×';
+  head.appendChild(headTitle);
+  head.appendChild(closeBtn);
+
+  var list = document.createElement('div');
+  list.className = 'side-nav__list';
+
+  navItems = [];
+  entries.forEach(function(en){
+    if(en.type === 'group'){
+      var g = document.createElement('div');
+      g.className = 'side-nav__group';
+      g.textContent = en.label;
+      list.appendChild(g);
+    }else{
+      var b = document.createElement('button');
+      b.className = 'side-nav__item';
+      var num = document.createElement('span');
+      num.className = 'side-nav__num';
+      num.textContent = en.num;
+      var lab = document.createElement('span');
+      lab.className = 'side-nav__label';
+      lab.textContent = en.label.replace(/^\s*\d+\s*[.、)）]\s*/,'');
+      b.appendChild(num);
+      b.appendChild(lab);
+      b.addEventListener('click', function(){
+        en.el.scrollIntoView({behavior:'smooth', block:'start'});
+        nav.classList.remove('open');
+      });
+      list.appendChild(b);
+      navItems.push({el:en.el, btn:b});
+    }
+  });
+
+  var foot = document.createElement('div');
+  foot.className = 'side-nav__foot';
+  var prog = document.createElement('span');
+  prog.className = 'side-nav__progress';
+  prog.textContent = '0%';
+  var topBtn = document.createElement('button');
+  topBtn.className = 'side-nav__top';
+  topBtn.textContent = '↑ 顶部';
+  topBtn.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+  foot.appendChild(prog);
+  foot.appendChild(topBtn);
+
+  nav.appendChild(head);
+  nav.appendChild(list);
+  nav.appendChild(foot);
+  document.body.appendChild(nav);
+
+  closeBtn.addEventListener('click', function(){ nav.classList.remove('open'); });
+
+  var fab = document.createElement('button');
+  fab.className = 'nav-fab';
+  fab.setAttribute('aria-label','打开目录');
+  fab.innerHTML = '<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+    '<path d="M24 17 C16 8 8 4 4 12 C2 20 8 27 14 26 C19 25 22 22 24 19 Z" fill="#2299ff" stroke="#084488" stroke-width="0.8"/>' +
+    '<path d="M24 17 C32 8 40 4 44 12 C46 20 40 27 34 26 C29 25 26 22 24 19 Z" fill="#2299ff" stroke="#084488" stroke-width="0.8"/>' +
+    '<path d="M24 26 C17 34 11 37 9 33 C8 29 15 25 20 24 C22 24 23 25 24 26 Z" fill="#1177dd" stroke="#084488" stroke-width="0.8"/>' +
+    '<path d="M24 26 C31 34 37 37 39 33 C40 29 33 25 28 24 C26 24 25 25 24 26 Z" fill="#1177dd" stroke="#084488" stroke-width="0.8"/>' +
+    '<path d="M24 13 L24 34" stroke="#083366" stroke-width="1.2" stroke-linecap="round"/>' +
+    '<path d="M24 13 C20 8 17 7 15 9" stroke="#083366" stroke-width="0.7" fill="none" stroke-linecap="round"/>' +
+    '<path d="M24 13 C28 8 31 7 33 9" stroke="#083366" stroke-width="0.7" fill="none" stroke-linecap="round"/>' +
+    '</svg>';
+  fab.addEventListener('click', function(){ nav.classList.toggle('open'); });
+  document.body.appendChild(fab);
+
+  var topFab = document.createElement('button');
+  topFab.className = 'nav-topfab';
+  topFab.setAttribute('aria-label','回到顶部');
+  topFab.textContent = '↑';
+  topFab.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+  document.body.appendChild(topFab);
+
+  navList = list;
+  navProg = prog;
+  navTopFab = topFab;
+
+  if(!navBuilt){
+    navBuilt = true;
+    window.addEventListener('scroll', onNavScroll, {passive:true});
+  }
+  onNavScroll();
+}
+
+function onNavScroll(){
+  var doc = document.documentElement;
+  if(!doc) return;
+  var max = doc.scrollHeight - window.innerHeight;
+  var ratio = max > 0 ? window.scrollY / max : 0;
+  if(navProg) navProg.textContent = Math.round(ratio * 100) + '%';
+  if(navTopFab) navTopFab.classList.toggle('show', window.scrollY > 300);
+
+  var mid = window.innerHeight * 0.35;
+  var current = null;
+  for(var k=0;k<navItems.length;k++){
+    var r = navItems[k].el.getBoundingClientRect();
+    if(r.top <= mid) current = navItems[k];
+  }
+  if(current){
+    for(var j=0;j<navItems.length;j++) navItems[j].btn.classList.remove('active');
+    current.btn.classList.add('active');
+    if(navList){
+      navList.scrollTop = current.btn.offsetTop - navList.clientHeight / 2;
+    }
+  }
+}
