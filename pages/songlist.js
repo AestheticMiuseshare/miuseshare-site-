@@ -28,11 +28,13 @@ _css.textContent = '.track-block{margin-bottom:1.6rem;padding:1rem;border:1px so
 '.side-nav__foot{padding:8px 12px;border-top:1px solid #eee;display:flex;justify-content:space-between;align-items:center;gap:.5rem}' +
 '.side-nav__progress{font-size:.72rem;color:#888;font-variant-numeric:tabular-nums}' +
 '.side-nav__top{background:#f4f4f4;border:1px solid #ddd;border-radius:8px;color:#333;font-size:.78rem;padding:.3rem .6rem;cursor:pointer}' +
-'.nav-fab{position:fixed;right:16px;bottom:88px;z-index:59;width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid #e5e7eb;box-shadow:0 6px 18px rgba(0,0,0,.1);display:none;align-items:center;justify-content:center;cursor:pointer;color:#333;font-size:1rem}' +
+'.nav-fab{position:fixed;right:16px;bottom:88px;z-index:62;width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid #e5e7eb;box-shadow:0 6px 18px rgba(0,0,0,.1);display:none;align-items:center;justify-content:center;cursor:pointer;color:#333;font-size:1rem}' +
 '.nav-fab svg{width:20px;height:20px;display:block;transition:color .18s ease,transform .18s ease}' +
 '.nav-fab:hover{color:#1a1a1a}' +
 '.nav-fab:hover svg{transform:rotate(-6deg)}' +
 '.nav-topfab{position:fixed;right:16px;bottom:136px;z-index:59;width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid #e5e7eb;box-shadow:0 6px 18px rgba(0,0,0,.1);display:none;align-items:center;justify-content:center;cursor:pointer;color:#333;font-size:1rem}' +
+'.side-nav-mask{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.18);z-index:58;display:none}' +
+'.side-nav-mask.show{display:block}' +
 '@media (max-width:900px){' +
 '.side-nav{right:0;top:0;transform:none;width:230px;max-height:100vh;border-radius:14px 0 0 14px;translate:110% 0;transition:translate .25s ease}' +
 '.side-nav.open{translate:0 0}' +
@@ -287,6 +289,23 @@ var navList = null;
 var navProg = null;
 var navTopFab = null;
 var navBuilt = false;
+var nav, mask, fab;
+
+function closeNav(){
+  nav.classList.remove('open');
+  mask.classList.remove('show');
+}
+function openNav(){
+  nav.classList.add('open');
+  mask.classList.add('show');
+}
+function toggleNav(){
+  if(nav.classList.contains('open')){
+    closeNav();
+  }else{
+    openNav();
+  }
+}
 
 function buildNav(){
   var old = document.querySelector('.side-nav');
@@ -295,6 +314,8 @@ function buildNav(){
   if(oldFab) oldFab.parentNode.removeChild(oldFab);
   var oldTop = document.querySelector('.nav-topfab');
   if(oldTop) oldTop.parentNode.removeChild(oldTop);
+  var oldMask = document.querySelector('.side-nav-mask');
+  if(oldMask) oldMask.parentNode.removeChild(oldMask);
 
   var nodes = wrap.children;
   var entries = [];
@@ -313,7 +334,7 @@ function buildNav(){
   }
   if(!entries.length) return;
 
-  var nav = document.createElement('nav');
+  nav = document.createElement('nav');
   nav.className = 'side-nav';
   nav.setAttribute('aria-label','曲目目录导航');
 
@@ -351,7 +372,7 @@ function buildNav(){
       b.appendChild(lab);
       b.addEventListener('click', function(){
         en.el.scrollIntoView({behavior:'smooth', block:'start'});
-        nav.classList.remove('open');
+        closeNav();
       });
       list.appendChild(b);
       navItems.push({el:en.el, btn:b});
@@ -375,9 +396,14 @@ function buildNav(){
   nav.appendChild(foot);
   document.body.appendChild(nav);
 
-  closeBtn.addEventListener('click', function(){ nav.classList.remove('open'); });
+  mask = document.createElement('div');
+  mask.className = 'side-nav-mask';
+  document.body.appendChild(mask);
 
-  var fab = document.createElement('button');
+  closeBtn.addEventListener('click', closeNav);
+  mask.addEventListener('click', closeNav);
+
+  fab = document.createElement('button');
   fab.className = 'nav-fab';
   fab.setAttribute('aria-label','打开目录');
   fab.innerHTML = '<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
@@ -389,7 +415,7 @@ function buildNav(){
     '<path d="M24 13 C20 8 17 7 15 9" stroke="#083366" stroke-width="0.7" fill="none" stroke-linecap="round"/>' +
     '<path d="M24 13 C28 8 31 7 33 9" stroke="#083366" stroke-width="0.7" fill="none" stroke-linecap="round"/>' +
     '</svg>';
-  fab.addEventListener('click', function(){ nav.classList.toggle('open'); });
+  fab.addEventListener('click', toggleNav);
   document.body.appendChild(fab);
 
   var topFab = document.createElement('button');
