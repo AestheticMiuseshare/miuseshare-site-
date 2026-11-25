@@ -28,14 +28,14 @@ _css.textContent = '.track-block{margin-bottom:1.6rem;padding:1rem;border:1px so
 '.side-nav__foot{padding:8px 12px;border-top:1px solid #eee;display:flex;justify-content:space-between;align-items:center;gap:.5rem}' +
 '.side-nav__progress{font-size:.72rem;color:#888;font-variant-numeric:tabular-nums}' +
 '.side-nav__top{background:#f4f4f4;border:1px solid #ddd;border-radius:8px;color:#333;font-size:.78rem;padding:.3rem .6rem;cursor:pointer}' +
-'.nav-fab{position:fixed;right:16px;bottom:88px;z-index:59;width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid #e5e7eb;box-shadow:0 6px 18px rgba(0,0,0,.1);display:none;align-items:center;justify-content:center;cursor:pointer;color:#333;font-size:1rem;transition:opacity 0.22s ease}' +
+'.nav-fab{position:fixed;right:16px;bottom:88px;z-index:59;width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid #e5e7eb;box-shadow:0 6px 18px rgba(0,0,0,.1);display:none;align-items:center;justify-content:center;cursor:pointer;color:#333;font-size:1rem}' +
 '.nav-fab svg{width:20px;height:20px;display:block;transition:color .18s ease,transform .18s ease}' +
 '.nav-fab:hover{color:#1a1a1a}' +
 '.nav-fab:hover svg{transform:rotate(-6deg)}' +
-'.nav-topfab{position:fixed;right:16px;bottom:136px;z-index:59;width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid #e5e7eb;box-shadow:0 6px 18px rgba(0,0,0,.1);display:none;align-items:center;justify-content:center;cursor:pointer;color:#333;font-size:1rem;transition:opacity 0.22s ease}' +
+'.nav-topfab{position:fixed;right:16px;bottom:136px;z-index:59;width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid #e5e7eb;box-shadow:0 6px 18px rgba(0,0,0,.1);display:none;align-items:center;justify-content:center;cursor:pointer;color:#333;font-size:1rem}' +
 '.side-nav-mask{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.18);z-index:58;display:none}' +
 '.side-nav-mask.show{display:block}' +
-'.body-lock{overflow:hidden !important;}' +
+'body.body-lock{overflow:hidden}' +
 '@media (max-width:900px){' +
 '.side-nav{right:0;top:0;width:230px;max-height:100vh;border-radius:14px 0 0 14px;transform:translateX(110%);transition:transform .25s ease}' +
 '.side-nav.open{transform:translateX(0)}' +
@@ -296,15 +296,15 @@ function closeNav(){
   nav.classList.remove('open');
   mask.classList.remove('show');
   document.body.classList.remove('body-lock');
-  if(fab) fab.style.opacity = '1';
-  if(navTopFab) navTopFab.style.opacity = '1';
+  if(fab) fab.style.display = '';
+  if(navTopFab) navTopFab.style.display = '';
 }
 function openNav(){
   nav.classList.add('open');
   mask.classList.add('show');
   document.body.classList.add('body-lock');
-  if(fab) fab.style.opacity = '0';
-  if(navTopFab) navTopFab.style.opacity = '0';
+  if(fab) fab.style.display = 'none';
+  if(navTopFab) navTopFab.style.display = 'none';
 }
 function toggleNav(){
   if(nav.classList.contains('open')){
@@ -315,19 +315,13 @@ function toggleNav(){
 }
 
 function scrollToEl(el){
-  try{
-    if(el.scrollIntoView){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
-    else { el.scrollIntoView(); }
-  }catch(err){
-    var top = 0;
-    var node = el;
-    while(node){ top += node.offsetTop; node = node.offsetParent; }
-    window.scrollTo(0, top);
-  }
+  if(!el) return;
+  var rect = el.getBoundingClientRect();
+  var target = rect.top + window.scrollY;
+  window.scrollTo(0, target);
 }
 function scrollToTop(){
-  try{ window.scrollTo({top:0, behavior:'smooth'}); }
-  catch(err){ window.scrollTo(0,0); }
+  window.scrollTo(0, 0);
 }
 
 function buildNav(){
@@ -395,7 +389,7 @@ function buildNav(){
       b.appendChild(lab);
       b.addEventListener('click', function(){
         closeNav();
-        scrollToEl(en.el);
+        setTimeout(function(){ scrollToEl(en.el); }, 60);
       });
       list.appendChild(b);
       navItems.push({el:en.el, btn:b});
@@ -430,22 +424,20 @@ function buildNav(){
   fab.className = 'nav-fab';
   fab.setAttribute('aria-label','打开目录');
   fab.innerHTML = '<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width:24px;height:24px">' +
-    '<defs>' +
-    '<style>' +
-    '.lw{transform-origin:24px 19px;animation:lw 0.6s ease-in-out infinite alternate}' +
-    '.rw{transform-origin:24px 19px;animation:rw 0.6s ease-in-out infinite alternate}' +
-    '.ld{transform-origin:24px 26px;animation:ld 0.68s ease-in-out infinite alternate}' +
-    '.rd{transform-origin:24px 26px;animation:rd 0.68s ease-in-out infinite alternate}' +
-    '@keyframes lw{from{transform:rotate(0deg)}to{transform:rotate(-14deg)}}' +
-    '@keyframes rw{from{transform:rotate(0deg)}to{transform:rotate(14deg)}}' +
-    '@keyframes ld{from{transform:rotate(0deg)}to{transform:rotate(-10deg)}}' +
-    '@keyframes rd{from{transform:rotate(0deg)}to{transform:rotate(10deg)}}' +
-    '</style>' +
-    '</defs>' +
-    '<path class="lw" d="M24 17 C16 8 8 4 4 12 C2 20 8 27 14 26 C19 25 22 22 24 19 Z" fill="#2299ff" stroke="#084488" stroke-width="0.8"/>' +
-    '<path class="rw" d="M24 17 C32 8 40 4 44 12 C46 20 40 27 34 26 C29 25 26 22 24 19 Z" fill="#2299ff" stroke="#084488" stroke-width="0.8"/>' +
-    '<path class="ld" d="M24 26 C17 34 11 37 9 33 C8 29 15 25 20 24 C22 24 23 25 24 26 Z" fill="#1177dd" stroke="#084488" stroke-width="0.8"/>' +
-    '<path class="rd" d="M24 26 C31 34 37 37 39 33 C40 29 33 25 28 24 C26 24 25 25 24 26 Z" fill="#1177dd" stroke="#084488" stroke-width="0.8"/>' +
+    '<defs><style>' +
+    '.fab-lw{transform-origin:24px 19px;animation:fab-lw 0.6s ease-in-out infinite alternate}' +
+    '.fab-rw{transform-origin:24px 19px;animation:fab-rw 0.6s ease-in-out infinite alternate}' +
+    '.fab-ld{transform-origin:24px 26px;animation:fab-ld 0.68s ease-in-out infinite alternate}' +
+    '.fab-rd{transform-origin:24px 26px;animation:fab-rd 0.68s ease-in-out infinite alternate}' +
+    '@keyframes fab-lw{from{transform:rotate(0deg)}to{transform:rotate(-12deg)}}' +
+    '@keyframes fab-rw{from{transform:rotate(0deg)}to{transform:rotate(12deg)}}' +
+    '@keyframes fab-ld{from{transform:rotate(0deg)}to{transform:rotate(-9deg)}}' +
+    '@keyframes fab-rd{from{transform:rotate(0deg)}to{transform:rotate(9deg)}}' +
+    '</style></defs>' +
+    '<path class="fab-lw" d="M24 17 C16 8 8 4 4 12 C2 20 8 27 14 26 C19 25 22 22 24 19 Z" fill="#2299ff" stroke="#084488" stroke-width="0.8"/>' +
+    '<path class="fab-rw" d="M24 17 C32 8 40 4 44 12 C46 20 40 27 34 26 C29 25 26 22 24 19 Z" fill="#2299ff" stroke="#084488" stroke-width="0.8"/>' +
+    '<path class="fab-ld" d="M24 26 C17 34 11 37 9 33 C8 29 15 25 20 24 C22 24 23 25 24 26 Z" fill="#1177dd" stroke="#084488" stroke-width="0.8"/>' +
+    '<path class="fab-rd" d="M24 26 C31 34 37 37 39 33 C40 29 33 25 28 24 C26 24 25 25 24 26 Z" fill="#1177dd" stroke="#084488" stroke-width="0.8"/>' +
     '<path d="M24 13 L24 34" stroke="#083366" stroke-width="1.2" stroke-linecap="round"/>' +
     '<path d="M24 13 C20 8 17 7 15 9" stroke="#083366" stroke-width="0.7" fill="none" stroke-linecap="round"/>' +
     '<path d="M24 13 C28 8 31 7 33 9" stroke="#083366" stroke-width="0.7" fill="none" stroke-linecap="round"/>' +
