@@ -226,7 +226,10 @@ function render(text){
 
       var metaDiv = document.createElement('div');
       metaDiv.className = 'track-meta';
-      metaDiv.textContent = t.artist + ' | ' + t.genre;
+      var metaParts = [];
+      if(t.artist) metaParts.push(t.artist);
+      if(t.genre) metaParts.push(t.genre.replace(/\s*,\s*/g, ', '));
+      metaDiv.textContent = metaParts.join(' | ');
       block.appendChild(metaDiv);
 
       if(t.link){
