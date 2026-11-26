@@ -56,6 +56,11 @@ An independent art creator focused on artistic connotation and cultural heritage
 - Lingering by Mulan Lake | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic | https://song.link/s/0Y74XUJ6lnGYMw9d5pKhcK
 - Whispers of Nature | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic | https://song.link/s/7y3na0HInbcHoJVKX2J8l4
 - Love From The Deep Sea | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic | https://song.link/s/4bYS1ZRbEEbkpV2tD0g6RW
+- Forest Awakening | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic | https://song.link/s/5kcEQtbs9AHLFUFglsrzh3
+- Stream Quest | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic | https://song.link/s/1IA0mmENh16fiMXCjKQTcm
+- Mulan Lake | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic | https://song.link/s/2qp8L7Lirzahw7J7qnamlP
+- Lingering by Mulan Lake | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic | https://song.link/s/0Y74XUJ6lnGYMw9d5pKhcK
+- Whispers of Nature | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic | https://song.link/s/7y3na0HInbcHoJVKX2J8l4
 
 ## 页面清单 / Pages
 - /pages/catalog.html 播放首页
