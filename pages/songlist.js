@@ -4,10 +4,10 @@ _css.textContent = '.track-block{margin-bottom:1.6rem;padding:1rem;border:1px so
 '.group-title-album{font-size:1.3rem;font-weight:bold;margin:2.2rem 0 1rem;color:#1a1a1a;border-bottom:1px solid #cccccc;padding-bottom:.4rem}' +
 '.track-index{font-size:1rem;color:#222;font-weight:normal;margin-right:.25rem}' +
 '.track-name{font-size:1rem;font-weight:bold}' +
-'.track-meta{font-size:.88rem;color:#555;margin:.4rem 0 .8rem;word-break:break-word;overflow-wrap:anywhere;line-height:1.5}' +
+'.track-meta{font-size:.88rem;color:#555;margin:.4rem 0 .8rem;word-break:break-word;overflow-wrap:break-word;line-height:1.5}' +
 '.track-img{max-width:100%;border-radius:8px;margin-bottom:0.8rem}' +
-'.poem-en{font-size:0.92rem;color:#333;margin:0.4rem 0 0.2rem 0;font-family:system-ui,-apple-system,\'Segoe UI\',Roboto,sans-serif}' +
-'.poem-cn{font-size:0.92rem;color:#444;margin-bottom:0.8rem}' +
+'.poem-en{font-size:0.92rem;color:#333;margin:0.4rem 0 0.2rem 0;font-family:system-ui,-apple-system,\'Segoe UI\',Roboto,sans-serif;white-space:normal;overflow-wrap:break-word;max-width:100%}' +
+'.poem-cn{font-size:0.92rem;color:#444;margin-bottom:0.8rem;white-space:normal;overflow-wrap:break-word;max-width:100%}' +
 '.play-btn{display:inline-block;padding:.4rem .8rem;background:#f4f4f4;border:1px solid #ccc;border-radius:8px;text-decoration:none;color:#222;font-size:.85rem}' +
 '.play-btn:active{background:#e9e9e9}' +
 '.tag-group{margin-top:.8rem}' +
@@ -163,6 +163,7 @@ function groupTitle(track){
 }
 function render(text){
   try{
+    text = String(text).replace(/\u00A0/g, ' ');
     wrap.innerHTML = '';
     var blocks = text
       .replace(/\r/g,'')
