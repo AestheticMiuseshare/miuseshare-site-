@@ -61,6 +61,11 @@ An independent art creator focused on artistic connotation and cultural heritage
 - Lockwyn | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic | https://song.link/s/0SyDeIx4Sxx0rYnB4Y95RO
 - Musical City-State | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic | https://song.link/s/4aVjMTEf3UpqJFV9IzznTN
 - Three-Leaf Clover | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic | https://song.link/s/729D3VPuaSVu0Ra9oBxxIr
+- Flying Chariot | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic | https://song.link/s/6zEVOSi5CwN0DfWbH8sPNW
+- Rustic Atmosphere | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic | https://song.link/s/1iHdBRIuJOPMr9qZRG5JRZ
+- Fado | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic | https://song.link/s/5qHjQDJ8dzBj48TsEWMlBR
+- Isabel | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic | https://song.link/s/3DeO9YQwXZb0kQGpAS8mgQ
+- Rive libre Rive romantique | Miuseshare | FusionMusic,NarrativeFolk,AtmosphericWorld,ArtMusic | https://song.link/s/0G61KpWRzNkGOwKopNfJKD
 
 ## 页面清单 / Pages
 - /pages/catalog.html 播放首页
