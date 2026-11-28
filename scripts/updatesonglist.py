@@ -50,6 +50,11 @@ MB_GROUPS = {
     "Old Pal": "65fbeb53-a4f8-4ed9-9d96-1a0b8e89ad44",
     "False Crown": "af4c4069-3b89-41f9-b39d-d1ed9875ae2c",
     "Far From Home": "5df11353-523f-47c7-a331-2fe11a9f13b3",
+    "Hallowed Ground": "dc41e16c-ee1a-4852-8609-4e145f8800eb",
+    "Oath of the Cold Stars": "58f8f9f0-331f-4c86-98b2-cfecdd2c0636",
+    "Forest Awakening": "fb581100-f273-4bf9-8970-cfccb99fdc10",
+    "Love From The Deep Sea": "0cd3df5c-c64f-43b6-bb1f-11e98d8f9b58",
+    "Dreams Set Sail": "bb9ba559-bdcf-4811-89ab-470fba681da1",
 }
 # Discogs Release ID 映射
 DISCOGS_RELEASES = {
@@ -73,6 +78,11 @@ DISCOGS_RELEASES = {
     "Old Pal": "39084687",
     "False Crown": "39084726",
     "Far From Home": "39084747",
+    "Hallowed Ground": "39171885",
+    "Forest Awakening": "39171963",
+    "Love From The Deep Sea": "39171967",
+    "Dreams Set Sail": "39172008",
+    "Flying Chariot": "39172119",
 }
 def read_body() -> str:
     raw = TXT.read_text(encoding="utf-8").replace("\r\n", "\n")
